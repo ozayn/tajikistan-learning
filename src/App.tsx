@@ -537,6 +537,7 @@ function FlashcardsSection() {
   const [currentSet, setCurrentSet] = useState<'language' | 'cities' | 'history'>('language')
   const [cardIndex, setCardIndex] = useState(0)
   const [isFlipped, setIsFlipped] = useState(false)
+  const [isPlayingAudio, setIsPlayingAudio] = useState(false)
 
   const flashcardSets: Record<'language' | 'cities' | 'history', Flashcard[]> = {
     language: [
@@ -587,6 +588,77 @@ function FlashcardsSection() {
     setIsFlipped(false)
   }
 
+  const getCacheKey = (text: string) => `audio_cache_${text}`
+
+  const getAudioFromCache = (text: string): string | null => {
+    try {
+      const cached = localStorage.getItem(getCacheKey(text))
+      return cached
+    } catch {
+      return null
+    }
+  }
+
+  const saveAudioToCache = (text: string, dataUrl: string) => {
+    try {
+      localStorage.setItem(getCacheKey(text), dataUrl)
+    } catch (error) {
+      console.warn('Failed to cache audio:', error)
+    }
+  }
+
+  const playFlashcardAudio = async (text: string) => {
+    setIsPlayingAudio(true)
+    try {
+      // Check cache first
+      const cachedAudio = getAudioFromCache(text)
+      if (cachedAudio) {
+        const audio = new Audio(cachedAudio)
+        audio.play()
+        setIsPlayingAudio(false)
+        return
+      }
+
+      // If not cached, fetch from API
+      const apiKey = import.meta.env.VITE_OPENAI_KEY
+      if (!apiKey) {
+        console.log('No OpenAI key configured. Audio unavailable.')
+        setIsPlayingAudio(false)
+        return
+      }
+
+      const response = await fetch('https://api.openai.com/v1/audio/speech', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${apiKey}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          model: 'tts-1',
+          input: text,
+          voice: 'onyx',
+        }),
+      })
+
+      if (response.ok) {
+        const arrayBuffer = await response.arrayBuffer()
+        const blob = new Blob([arrayBuffer], { type: 'audio/mpeg' })
+        const reader = new FileReader()
+        reader.onload = () => {
+          const dataUrl = reader.result as string
+          saveAudioToCache(text, dataUrl)
+          const audio = new Audio(dataUrl)
+          audio.play()
+          setIsPlayingAudio(false)
+        }
+        reader.readAsDataURL(blob)
+      }
+    } catch (error) {
+      console.error('Audio playback failed:', error)
+      setIsPlayingAudio(false)
+    }
+  }
+
   return (
     <div className="space-y-8">
       <h2 className="text-4xl font-light text-stone-900 mb-10">Flashcards</h2>
@@ -629,24 +701,46 @@ function FlashcardsSection() {
           >
             {/* Front */}
             <div
-              className="absolute w-full h-full bg-white border-2 border-stone-300 rounded-lg p-6 sm:p-8 flex items-center justify-center text-center"
+              className="absolute w-full h-full bg-white border-2 border-stone-300 rounded-lg p-6 sm:p-8 flex flex-col items-center justify-center text-center gap-4"
               style={{ backfaceVisibility: 'hidden' }}
             >
               <div>
                 <p className="text-sm text-stone-500 mb-4">Click to reveal</p>
                 <p className="text-3xl sm:text-4xl font-light text-stone-900">{card.front}</p>
               </div>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation()
+                  playFlashcardAudio(card.front)
+                }}
+                disabled={isPlayingAudio}
+                className="px-3 py-1 bg-stone-200 hover:bg-stone-300 disabled:bg-stone-300 rounded transition-colors text-sm"
+                title="Pronounce this word"
+              >
+                {isPlayingAudio ? '⏸' : '🔊'}
+              </button>
             </div>
 
             {/* Back */}
             <div
-              className="absolute w-full h-full bg-stone-100 border-2 border-stone-300 rounded-lg p-6 sm:p-8 flex items-center justify-center text-center"
+              className="absolute w-full h-full bg-stone-100 border-2 border-stone-300 rounded-lg p-6 sm:p-8 flex flex-col items-center justify-center text-center gap-4"
               style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
             >
               <div>
                 <p className="text-sm text-stone-500 mb-2">{card.category}</p>
                 <p className="text-2xl sm:text-3xl font-light text-stone-900">{card.back}</p>
               </div>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation()
+                  playFlashcardAudio(card.front)
+                }}
+                disabled={isPlayingAudio}
+                className="px-3 py-1 bg-stone-300 hover:bg-stone-400 disabled:bg-stone-400 rounded transition-colors text-sm"
+                title="Pronounce the Tajik word"
+              >
+                {isPlayingAudio ? '⏸' : '🔊'}
+              </button>
             </div>
           </div>
         </div>

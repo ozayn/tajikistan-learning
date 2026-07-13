@@ -7,12 +7,32 @@ A modern, minimal learning app about Tajikistan—its history, culture, politics
 - 🗣️ Tajik phrases with Cyrillic script, transliteration, and Farsi translations
 - 🔊 Audio pronunciation via OpenAI Text-to-Speech API
 - 🎨 Clean, reductive design with minimal typography
-- 🌍 Learn about Dushanbe, Khujand, and Khorog
+- 📱 Fully responsive mobile-first design
 - 🇷🇸 Cyrillic guide for Serbian speakers
+- 🌐 Progressive Web App (PWA) — installable on mobile & desktop
+- 🌍 Learn about Dushanbe, Khujand, and Khorog
 
 ## Setup
 
-### Local Development
+### Quick Start (Recommended)
+
+**macOS/Linux:**
+```bash
+./run.sh
+```
+
+**Windows:**
+```cmd
+run.bat
+```
+
+The setup script will:
+- Check Node.js version (16+)
+- Install dependencies
+- Set up `.env.local` with your OpenAI key
+- Start the dev server at `http://localhost:5173`
+
+### Manual Setup
 
 1. **Install dependencies:**
    ```bash
@@ -25,7 +45,7 @@ A modern, minimal learning app about Tajikistan—its history, culture, politics
    ```
    Then add your OpenAI API key:
    ```
-   REACT_APP_OPENAI_KEY=sk_...
+   VITE_OPENAI_KEY=sk_...
    ```
 
 3. **Run the dev server:**
@@ -40,13 +60,18 @@ A modern, minimal learning app about Tajikistan—its history, culture, politics
    npm run preview
    ```
 
-## Audio Pronunciation Setup
+## Audio & PWA Features
 
-The app includes 🔊 buttons to hear Tajik pronunciation using OpenAI's TTS API:
+**Audio Pronunciation:**
+- 🔊 Click buttons in Language section to hear Tajik words
+- Get your OpenAI API key from [platform.openai.com](https://platform.openai.com)
+- Add it to `.env.local` as `VITE_OPENAI_KEY`
 
-1. Get your OpenAI API key from [platform.openai.com](https://platform.openai.com)
-2. Add it to `.env.local` as `REACT_APP_OPENAI_KEY`
-3. Audio buttons will be enabled automatically
+**Progressive Web App (PWA):**
+- 📱 Install as app on mobile or desktop
+- ⚡ Works offline (caches content automatically)
+- 🎯 Home screen icon and app shortcut
+- 📲 Full-screen immersive experience
 
 ## Deploy to Vercel
 

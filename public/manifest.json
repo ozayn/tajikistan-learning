@@ -1,0 +1,43 @@
+{
+  "name": "Tajikistan Learning App",
+  "short_name": "Tajikistan",
+  "description": "Learn about Tajikistan's history, culture, language, and cities with Cyrillic script and audio pronunciation.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#000000",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect fill='%23fafaf9' width='192' height='192'/><text x='50%' y='50%' font-size='120' font-weight='bold' text-anchor='middle' dominant-baseline='central' fill='%23292423'>ТА</text></svg>",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 540 720'><rect fill='%23fafaf9' width='540' height='720'/><text x='270' y='100' font-size='48' font-weight='bold' text-anchor='middle' fill='%23292423'>Tajikistan</text><text x='270' y='200' font-size='20' text-anchor='middle' fill='%23666666'>Learn the language and culture</text></svg>",
+      "sizes": "540x720",
+      "type": "image/svg+xml",
+      "form_factor": "narrow"
+    }
+  ],
+  "categories": ["education", "travel"],
+  "shortcuts": [
+    {
+      "name": "Language",
+      "short_name": "Language",
+      "description": "Learn Tajik phrases",
+      "url": "/?section=language",
+      "icons": []
+    },
+    {
+      "name": "Cities",
+      "short_name": "Cities",
+      "description": "Explore Tajik cities",
+      "url": "/?section=cities",
+      "icons": []
+    }
+  ]
+}

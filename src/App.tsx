@@ -87,23 +87,23 @@ export default function App() {
     <div className="min-h-screen bg-stone-50">
       {/* Header */}
       <header className="border-b border-stone-200">
-        <div className="max-w-4xl mx-auto px-6 py-16">
-          <h1 className="text-6xl font-light text-stone-900 mb-3">Tajikistan</h1>
-          <p className="text-xl text-stone-600 font-light leading-relaxed">A learning journey through history, culture, and language</p>
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
+          <h1 className="text-4xl sm:text-6xl font-light text-stone-900 mb-2 sm:mb-3">Tajikistan</h1>
+          <p className="text-lg sm:text-xl text-stone-600 font-light leading-relaxed">A learning journey through history, culture, and language</p>
         </div>
       </header>
 
       {/* Navigation */}
       <nav className="border-b border-stone-200 bg-white sticky top-0 z-10">
-        <div className="max-w-4xl mx-auto px-6">
-          <div className="flex overflow-x-auto gap-8">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6">
+          <div className="flex overflow-x-auto gap-2 sm:gap-8">
             {sections.map((section) => {
               const Icon = section.icon
               return (
                 <button
                   key={section.id}
                   onClick={() => setActiveSection(section.id)}
-                  className={`py-4 px-1 border-b-2 transition-all flex items-center gap-2 text-sm font-medium ${
+                  className={`py-4 px-2 sm:px-1 border-b-2 transition-all flex items-center gap-1 sm:gap-2 text-xs sm:text-sm font-medium whitespace-nowrap ${
                     activeSection === section.id
                       ? 'border-stone-900 text-stone-900'
                       : 'border-transparent text-stone-500 hover:text-stone-700'
@@ -119,7 +119,7 @@ export default function App() {
       </nav>
 
       {/* Content */}
-      <main className="max-w-4xl mx-auto px-6 py-16 text-base">
+      <main className="max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-16 text-base">
         {activeSection === 'history' && <HistorySection />}
         {activeSection === 'culture' && <CultureSection />}
         {activeSection === 'politics' && <PoliticsSection />}
@@ -581,9 +581,9 @@ function PhraseRow({ phrase }: { phrase: Phrase }) {
 
 function ContentCard({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <div className="bg-white rounded-lg border border-stone-200 p-8">
-      <h3 className="text-2xl font-light text-stone-900 mb-6">{title}</h3>
-      <div className="space-y-5 text-base text-stone-700 leading-relaxed">{children}</div>
+    <div className="bg-white rounded-lg border border-stone-200 p-4 sm:p-8">
+      <h3 className="text-xl sm:text-2xl font-light text-stone-900 mb-4 sm:mb-6">{title}</h3>
+      <div className="space-y-4 sm:space-y-5 text-base text-stone-700 leading-relaxed">{children}</div>
     </div>
   )
 }

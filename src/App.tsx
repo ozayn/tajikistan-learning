@@ -53,6 +53,7 @@ export default function App() {
     }
     return false
   })
+  const [drawerOpen, setDrawerOpen] = useState(false)
 
   useEffect(() => {
     localStorage.setItem('theme', isDark ? 'dark' : 'light')
@@ -70,17 +71,17 @@ export default function App() {
   ]
 
   return (
-    <div className="min-h-screen bg-white dark:bg-stone-950 text-stone-900 dark:text-stone-100 transition-colors">
+    <div className="min-h-screen bg-white dark:bg-stone-950 text-stone-900 dark:text-stone-100 transition-colors flex flex-col">
       {/* Header */}
       <header className="border-b border-stone-200 dark:border-stone-800">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 py-12 sm:py-16 flex justify-between items-start">
-          <div>
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-16 flex justify-between items-start">
+          <div className="flex-1">
             <h1 className="text-4xl sm:text-6xl font-light text-stone-900 dark:text-stone-50 mb-2 sm:mb-3">Tajikistan</h1>
             <p className="text-lg sm:text-xl text-stone-600 dark:text-stone-400 font-light leading-relaxed">A learning journey through history, culture, and language</p>
           </div>
           <button
             onClick={() => setIsDark(!isDark)}
-            className="mt-2 px-3 py-2 rounded-lg bg-stone-100 dark:bg-stone-900 hover:bg-stone-200 dark:hover:bg-stone-800 transition-all duration-200 text-sm font-medium border border-stone-200 dark:border-stone-800"
+            className="mt-2 px-3 py-2 rounded-lg bg-stone-100 dark:bg-stone-900 hover:bg-stone-200 dark:hover:bg-stone-800 transition-all duration-200 text-sm font-medium border border-stone-200 dark:border-stone-800 flex-shrink-0"
             title={isDark ? 'Light mode' : 'Dark mode'}
           >
             {isDark ? '◐' : '◑'}
@@ -88,41 +89,95 @@ export default function App() {
         </div>
       </header>
 
-      {/* Navigation */}
-      <nav className="border-b border-stone-200 dark:border-stone-800 bg-white dark:bg-stone-900 sticky top-0 z-10">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6">
-          <div className="flex overflow-x-auto gap-2 sm:gap-8">
+      {/* Main Layout Container */}
+      <div className="flex flex-1 overflow-hidden">
+        {/* Mobile Navigation Header */}
+        <nav className="sm:hidden fixed top-0 left-0 right-0 bg-white dark:bg-stone-900 border-b border-stone-200 dark:border-stone-800 z-20 flex items-center h-16 px-4">
+          <button
+            onClick={() => setDrawerOpen(!drawerOpen)}
+            className="p-2 rounded-lg hover:bg-stone-100 dark:hover:bg-stone-800 transition-all duration-200"
+            title="Open menu"
+          >
+            {drawerOpen ? '✕' : '☰'}
+          </button>
+          <div className="flex-1 text-center">
+            <span className="text-sm font-medium text-stone-600 dark:text-stone-400">
+              {sections.find(s => s.id === activeSection)?.label}
+            </span>
+          </div>
+          <div className="w-10" />
+        </nav>
+
+        {/* Mobile Drawer */}
+        {drawerOpen && (
+          <>
+            <div
+              className="fixed inset-0 bg-black bg-opacity-30 z-30 sm:hidden"
+              onClick={() => setDrawerOpen(false)}
+            />
+            <aside className="fixed left-0 top-16 bottom-0 w-64 bg-white dark:bg-stone-900 border-r border-stone-200 dark:border-stone-800 overflow-y-auto z-40 sm:hidden">
+              <div className="p-4 space-y-1">
+                {sections.map((section) => {
+                  const Icon = section.icon
+                  return (
+                    <button
+                      key={section.id}
+                      onClick={() => {
+                        setActiveSection(section.id)
+                        setDrawerOpen(false)
+                      }}
+                      className={`w-full px-4 py-3 rounded-lg transition-all duration-200 flex items-center gap-3 text-sm font-medium ${
+                        activeSection === section.id
+                          ? 'bg-stone-900 dark:bg-stone-100 text-white dark:text-stone-900'
+                          : 'text-stone-700 dark:text-stone-300 hover:bg-stone-100 dark:hover:bg-stone-800'
+                      }`}
+                    >
+                      <Icon className="w-5 h-5 flex-shrink-0" />
+                      {section.label}
+                    </button>
+                  )
+                })}
+              </div>
+            </aside>
+          </>
+        )}
+
+        {/* Desktop Sidebar */}
+        <aside className="hidden sm:flex sm:flex-col w-64 border-r border-stone-200 dark:border-stone-800 bg-white dark:bg-stone-900 flex-shrink-0 overflow-y-auto">
+          <div className="p-6 space-y-1 sticky top-0">
             {sections.map((section) => {
               const Icon = section.icon
               return (
                 <button
                   key={section.id}
                   onClick={() => setActiveSection(section.id)}
-                  className={`py-3 px-3 transition-all duration-200 flex items-center gap-2 text-xs sm:text-sm font-medium whitespace-nowrap rounded-lg ${
+                  className={`w-full px-4 py-3 rounded-lg transition-all duration-200 flex items-center gap-3 text-sm font-medium ${
                     activeSection === section.id
                       ? 'bg-stone-900 dark:bg-stone-100 text-white dark:text-stone-900'
-                      : 'text-stone-600 dark:text-stone-400 hover:bg-stone-100 dark:hover:bg-stone-800'
+                      : 'text-stone-700 dark:text-stone-300 hover:bg-stone-100 dark:hover:bg-stone-800'
                   }`}
                 >
-                  <Icon className="w-4 h-4" />
+                  <Icon className="w-5 h-5 flex-shrink-0" />
                   {section.label}
                 </button>
               )
             })}
           </div>
-        </div>
-      </nav>
+        </aside>
 
-      {/* Content */}
-      <main className="max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-16 text-base">
-        {activeSection === 'history' && <HistorySection />}
-        {activeSection === 'culture' && <CultureSection />}
-        {activeSection === 'politics' && <PoliticsSection />}
-        {activeSection === 'language' && <LanguageSection />}
-        {activeSection === 'cities' && <CitiesSection />}
-        {activeSection === 'photography' && <PhotographySection />}
-        {activeSection === 'flashcards' && <FlashcardsSection />}
-      </main>
+        {/* Content */}
+        <main className="flex-1 overflow-y-auto pt-16 sm:pt-0 px-4 sm:px-8 py-8 sm:py-16 text-base">
+          <div className="max-w-3xl">
+            {activeSection === 'history' && <HistorySection />}
+            {activeSection === 'culture' && <CultureSection />}
+            {activeSection === 'politics' && <PoliticsSection />}
+            {activeSection === 'language' && <LanguageSection />}
+            {activeSection === 'cities' && <CitiesSection />}
+            {activeSection === 'photography' && <PhotographySection />}
+            {activeSection === 'flashcards' && <FlashcardsSection />}
+          </div>
+        </main>
+      </div>
     </div>
   )
 }

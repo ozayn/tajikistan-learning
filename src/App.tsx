@@ -83,7 +83,7 @@ export default function App() {
             className="mt-2 px-3 py-2 rounded-lg bg-stone-200 dark:bg-stone-800 hover:bg-stone-300 dark:hover:bg-stone-700 transition-colors text-sm font-medium"
             title={isDark ? 'Light mode' : 'Dark mode'}
           >
-            {isDark ? '☀️' : '🌙'}
+            {isDark ? '◐' : '◑'}
           </button>
         </div>
       </header>
@@ -720,7 +720,7 @@ function FlashcardsSection() {
                 className="px-4 sm:px-6 py-2 sm:py-3 bg-stone-200 dark:bg-stone-800 hover:bg-stone-300 dark:hover:bg-stone-700 disabled:bg-stone-300 dark:disabled:bg-stone-700 rounded transition-colors text-base sm:text-lg min-h-10 min-w-10"
                 title="Pronounce this word"
               >
-                {isPlayingAudio ? '⏸' : '🔊'}
+                {isPlayingAudio ? '◼' : '♪'}
               </button>
             </div>
 
@@ -742,7 +742,7 @@ function FlashcardsSection() {
                 className="px-4 sm:px-6 py-2 sm:py-3 bg-stone-300 dark:bg-stone-700 hover:bg-stone-400 dark:hover:bg-stone-600 disabled:bg-stone-400 dark:disabled:bg-stone-600 rounded transition-colors text-base sm:text-lg min-h-10 min-w-10"
                 title="Pronounce the Tajik word"
               >
-                {isPlayingAudio ? '⏸' : '🔊'}
+                {isPlayingAudio ? '◼' : '♪'}
               </button>
             </div>
           </div>
@@ -767,7 +767,7 @@ function FlashcardsSection() {
             onClick={shuffle}
             className="flex-1 sm:flex-none px-3 sm:px-6 py-2.5 sm:py-2 bg-stone-900 dark:bg-stone-100 hover:bg-stone-800 dark:hover:bg-stone-200 active:bg-black dark:active:bg-stone-300 text-white dark:text-stone-900 rounded-lg transition-colors font-medium text-sm sm:text-base min-h-10"
           >
-            🔀 Shuffle
+            ⇌ Shuffle
           </button>
           <button
             onClick={nextCard}
@@ -879,7 +879,7 @@ function PhraseRow({ phrase }: { phrase: Phrase }) {
           className="text-base bg-stone-200 hover:bg-stone-300 disabled:bg-stone-300 px-3 py-2 rounded transition-colors"
           title="Play pronunciation (requires OpenAI API key)"
         >
-          {isPlaying ? '⏸' : '🔊'}
+          {isPlaying ? '◼' : '♪'}
         </button>
       </div>
     </div>

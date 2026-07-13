@@ -685,10 +685,10 @@ function FlashcardsSection() {
       </div>
 
       {/* Flashcard */}
-      <div className="flex flex-col items-center gap-8">
+      <div className="flex flex-col items-center gap-4 sm:gap-8 w-full">
         <div
           onClick={() => setIsFlipped(!isFlipped)}
-          className="w-full max-w-2xl h-64 sm:h-80 cursor-pointer perspective"
+          className="w-full max-w-2xl h-56 sm:h-80 cursor-pointer perspective touch-none"
         >
           <div
             className={`relative w-full h-full transition-transform duration-500 ${
@@ -701,12 +701,12 @@ function FlashcardsSection() {
           >
             {/* Front */}
             <div
-              className="absolute w-full h-full bg-white border-2 border-stone-300 rounded-lg p-6 sm:p-8 flex flex-col items-center justify-center text-center gap-4"
+              className="absolute w-full h-full bg-white border-2 border-stone-300 rounded-lg p-4 sm:p-8 flex flex-col items-center justify-center text-center gap-3 sm:gap-4"
               style={{ backfaceVisibility: 'hidden' }}
             >
               <div>
-                <p className="text-sm text-stone-500 mb-4">Click to reveal</p>
-                <p className="text-3xl sm:text-4xl font-light text-stone-900">{card.front}</p>
+                <p className="text-xs sm:text-sm text-stone-500 mb-3 sm:mb-4">Click to reveal</p>
+                <p className="text-2xl sm:text-4xl font-light text-stone-900 break-words">{card.front}</p>
               </div>
               <button
                 onClick={(e) => {
@@ -714,7 +714,7 @@ function FlashcardsSection() {
                   playFlashcardAudio(card.front)
                 }}
                 disabled={isPlayingAudio}
-                className="px-3 py-1 bg-stone-200 hover:bg-stone-300 disabled:bg-stone-300 rounded transition-colors text-sm"
+                className="px-4 sm:px-6 py-2 sm:py-3 bg-stone-200 hover:bg-stone-300 disabled:bg-stone-300 rounded transition-colors text-base sm:text-lg min-h-10 min-w-10"
                 title="Pronounce this word"
               >
                 {isPlayingAudio ? '⏸' : '🔊'}
@@ -723,12 +723,12 @@ function FlashcardsSection() {
 
             {/* Back */}
             <div
-              className="absolute w-full h-full bg-stone-100 border-2 border-stone-300 rounded-lg p-6 sm:p-8 flex flex-col items-center justify-center text-center gap-4"
+              className="absolute w-full h-full bg-stone-100 border-2 border-stone-300 rounded-lg p-4 sm:p-8 flex flex-col items-center justify-center text-center gap-3 sm:gap-4"
               style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
             >
               <div>
-                <p className="text-sm text-stone-500 mb-2">{card.category}</p>
-                <p className="text-2xl sm:text-3xl font-light text-stone-900">{card.back}</p>
+                <p className="text-xs sm:text-sm text-stone-500 mb-2">{card.category}</p>
+                <p className="text-xl sm:text-3xl font-light text-stone-900 break-words">{card.back}</p>
               </div>
               <button
                 onClick={(e) => {
@@ -736,7 +736,7 @@ function FlashcardsSection() {
                   playFlashcardAudio(card.front)
                 }}
                 disabled={isPlayingAudio}
-                className="px-3 py-1 bg-stone-300 hover:bg-stone-400 disabled:bg-stone-400 rounded transition-colors text-sm"
+                className="px-4 sm:px-6 py-2 sm:py-3 bg-stone-300 hover:bg-stone-400 disabled:bg-stone-400 rounded transition-colors text-base sm:text-lg min-h-10 min-w-10"
                 title="Pronounce the Tajik word"
               >
                 {isPlayingAudio ? '⏸' : '🔊'}
@@ -747,34 +747,34 @@ function FlashcardsSection() {
 
         {/* Progress */}
         <div className="text-center">
-          <p className="text-lg text-stone-700 font-medium">
+          <p className="text-base sm:text-lg text-stone-700 font-medium">
             {cardIndex + 1} / {cards.length}
           </p>
         </div>
 
-        {/* Controls */}
-        <div className="flex gap-3 sm:gap-4 flex-wrap justify-center">
+        {/* Controls - Optimized for mobile */}
+        <div className="flex gap-2 sm:gap-4 flex-wrap justify-center w-full px-2">
           <button
             onClick={prevCard}
-            className="px-4 sm:px-6 py-2 bg-stone-200 hover:bg-stone-300 rounded-lg transition-colors font-medium"
+            className="flex-1 sm:flex-none px-3 sm:px-6 py-2.5 sm:py-2 bg-stone-200 hover:bg-stone-300 active:bg-stone-400 rounded-lg transition-colors font-medium text-sm sm:text-base min-h-10"
           >
-            ← Previous
+            ← Prev
           </button>
           <button
             onClick={shuffle}
-            className="px-4 sm:px-6 py-2 bg-stone-900 hover:bg-stone-800 text-white rounded-lg transition-colors font-medium"
+            className="flex-1 sm:flex-none px-3 sm:px-6 py-2.5 sm:py-2 bg-stone-900 hover:bg-stone-800 active:bg-black text-white rounded-lg transition-colors font-medium text-sm sm:text-base min-h-10"
           >
             🔀 Shuffle
           </button>
           <button
             onClick={nextCard}
-            className="px-4 sm:px-6 py-2 bg-stone-200 hover:bg-stone-300 rounded-lg transition-colors font-medium"
+            className="flex-1 sm:flex-none px-3 sm:px-6 py-2.5 sm:py-2 bg-stone-200 hover:bg-stone-300 active:bg-stone-400 rounded-lg transition-colors font-medium text-sm sm:text-base min-h-10"
           >
             Next →
           </button>
         </div>
 
-        <p className="text-sm text-stone-500 mt-4 text-center">Click the card to flip it</p>
+        <p className="text-xs sm:text-sm text-stone-500 text-center px-2">Tap the card to flip</p>
       </div>
     </div>
   )

@@ -289,68 +289,61 @@ function HistorySection() {
       </ContentCard>
 
       <ContentCard title="Historical Timeline">
-        <svg viewBox="0 0 100 500" className="w-full h-auto my-6" style={{ minHeight: '600px' }}>
+        <svg viewBox="0 0 120 220" className="w-full h-auto my-4" preserveAspectRatio="xMidYMid meet" style={{ maxHeight: '400px' }}>
           {/* Timeline line */}
-          <line x1="50" y1="10" x2="50" y2="490" stroke="currentColor" strokeWidth="2" opacity="0.3" />
+          <line x1="20" y1="5" x2="20" y2="215" stroke="currentColor" strokeWidth="1.2" opacity="0.4" />
 
           {/* Ancient Period */}
-          <circle cx="50" cy="30" r="3" fill="currentColor" />
-          <rect x="8" y="20" width="35" height="35" fill="none" stroke="currentColor" strokeWidth="1.5" rx="2" />
-          <text x="10" y="35" fontSize="9" fontWeight="bold" fill="currentColor">3000 BC – 7th c. AD</text>
-          <text x="10" y="42" fontSize="7" fill="currentColor">Achaemenid, Alexander,</text>
-          <text x="10" y="48" fontSize="7" fill="currentColor">Parthian, Sassanid</text>
+          <circle cx="20" cy="15" r="2" fill="currentColor" />
+          <rect x="2" y="8" width="28" height="18" fill="none" stroke="currentColor" strokeWidth="1" rx="1" />
+          <text x="4" y="13" fontSize="6.5" fontWeight="bold" fill="currentColor">3000 BC–7th c.</text>
+          <text x="4" y="19" fontSize="5" fill="currentColor">Ancient empires</text>
 
           {/* Islamic Golden Age */}
-          <circle cx="50" cy="90" r="3" fill="currentColor" />
-          <rect x="57" y="75" width="35" height="35" fill="none" stroke="currentColor" strokeWidth="1.5" rx="2" />
-          <text x="59" y="90" fontSize="9" fontWeight="bold" fill="currentColor">7th – 13th c.</text>
-          <text x="59" y="97" fontSize="7" fill="currentColor">Islamic Golden Age</text>
-          <text x="59" y="103" fontSize="7" fill="currentColor">Samanid peak</text>
+          <circle cx="20" cy="42" r="2" fill="currentColor" />
+          <rect x="32" y="35" width="28" height="18" fill="none" stroke="currentColor" strokeWidth="1" rx="1" />
+          <text x="34" y="40" fontSize="6.5" fontWeight="bold" fill="currentColor">7th–13th c.</text>
+          <text x="34" y="46" fontSize="5" fill="currentColor">Golden Age</text>
 
           {/* Mongol & Timurid */}
-          <circle cx="50" cy="150" r="3" fill="currentColor" />
-          <rect x="8" y="135" width="35" height="35" fill="none" stroke="currentColor" strokeWidth="1.5" rx="2" />
-          <text x="10" y="150" fontSize="9" fontWeight="bold" fill="currentColor">13th – 15th c.</text>
-          <text x="10" y="157" fontSize="7" fill="currentColor">Mongol invasions</text>
-          <text x="10" y="163" fontSize="7" fill="currentColor">Timurid Renaissance</text>
+          <circle cx="20" cy="69" r="2" fill="currentColor" />
+          <rect x="2" y="62" width="28" height="18" fill="none" stroke="currentColor" strokeWidth="1" rx="1" />
+          <text x="4" y="67" fontSize="6.5" fontWeight="bold" fill="currentColor">13th–15th c.</text>
+          <text x="4" y="73" fontSize="5" fill="currentColor">Mongol & Timurid</text>
 
           {/* Russian Expansion */}
-          <circle cx="50" cy="210" r="3" fill="currentColor" />
-          <rect x="57" y="195" width="35" height="35" fill="none" stroke="currentColor" strokeWidth="1.5" rx="2" />
-          <text x="59" y="210" fontSize="9" fontWeight="bold" fill="currentColor">1868 – 1895</text>
-          <text x="59" y="217" fontSize="7" fill="currentColor">Russian expansion</text>
-          <text x="59" y="223" fontSize="7" fill="currentColor">Border treaties</text>
+          <circle cx="20" cy="96" r="2" fill="currentColor" />
+          <rect x="32" y="89" width="28" height="18" fill="none" stroke="currentColor" strokeWidth="1" rx="1" />
+          <text x="34" y="94" fontSize="6.5" fontWeight="bold" fill="currentColor">1868–1895</text>
+          <text x="34" y="100" fontSize="5" fill="currentColor">Russian expansion</text>
 
           {/* Soviet Period */}
-          <circle cx="50" cy="270" r="3" fill="currentColor" />
-          <rect x="8" y="255" width="35" height="35" fill="none" stroke="currentColor" strokeWidth="1.5" rx="2" />
-          <text x="10" y="270" fontSize="9" fontWeight="bold" fill="currentColor">1924 – 1929</text>
-          <text x="10" y="277" fontSize="7" fill="currentColor">Soviet creation</text>
-          <text x="10" y="283" fontSize="7" fill="currentColor">Tajik ASSR → SSR</text>
+          <circle cx="20" cy="123" r="2" fill="currentColor" />
+          <rect x="2" y="116" width="28" height="18" fill="none" stroke="currentColor" strokeWidth="1" rx="1" />
+          <text x="4" y="121" fontSize="6.5" fontWeight="bold" fill="currentColor">1924–1929</text>
+          <text x="4" y="127" fontSize="5" fill="currentColor">Soviet creation</text>
 
           {/* Independence & Civil War */}
-          <circle cx="50" cy="330" r="3" fill="currentColor" />
-          <rect x="57" y="315" width="35" height="35" fill="none" stroke="currentColor" strokeWidth="1.5" rx="2" />
-          <text x="59" y="330" fontSize="9" fontWeight="bold" fill="currentColor">1991 – 1997</text>
-          <text x="59" y="337" fontSize="7" fill="currentColor">Independence (1991)</text>
-          <text x="59" y="343" fontSize="7" fill="currentColor">Civil War → Peace</text>
+          <circle cx="20" cy="150" r="2" fill="currentColor" />
+          <rect x="32" y="143" width="28" height="18" fill="none" stroke="currentColor" strokeWidth="1" rx="1" />
+          <text x="34" y="148" fontSize="6.5" fontWeight="bold" fill="currentColor">1991–1997</text>
+          <text x="34" y="154" fontSize="5" fill="currentColor">Independence</text>
 
           {/* Modern Era */}
-          <circle cx="50" cy="390" r="3" fill="currentColor" />
-          <rect x="8" y="375" width="35" height="35" fill="none" stroke="currentColor" strokeWidth="1.5" rx="2" />
-          <text x="10" y="390" fontSize="9" fontWeight="bold" fill="currentColor">1997 – Present</text>
-          <text x="10" y="397" fontSize="7" fill="currentColor">Reconstruction</text>
-          <text x="10" y="403" fontSize="7" fill="currentColor">Nation-building</text>
+          <circle cx="20" cy="177" r="2" fill="currentColor" />
+          <rect x="2" y="170" width="28" height="18" fill="none" stroke="currentColor" strokeWidth="1" rx="1" />
+          <text x="4" y="175" fontSize="6.5" fontWeight="bold" fill="currentColor">1997–Now</text>
+          <text x="4" y="181" fontSize="5" fill="currentColor">Nation-building</text>
         </svg>
 
-        <div className="mt-8 space-y-3 text-sm text-stone-600 dark:text-stone-400">
-          <p><strong className="text-stone-900 dark:text-stone-50">3000 BC – 7th Century AD:</strong> Achaemenid Empire → Alexander the Great → Parthian & Sassanid Empires</p>
-          <p><strong className="text-stone-900 dark:text-stone-50">7th – 13th Century:</strong> Islamic Golden Age with Samanid Empire (9th–10th century) as peak of Persian-Tajik civilization</p>
-          <p><strong className="text-stone-900 dark:text-stone-50">13th – 15th Century:</strong> Mongol invasions followed by Timurid Renaissance and cultural flowering</p>
-          <p><strong className="text-stone-900 dark:text-stone-50">1868 – 1895:</strong> Russian expansion into Central Asia; border treaties define Amu Darya as boundary</p>
-          <p><strong className="text-stone-900 dark:text-stone-50">1924 – 1929:</strong> Soviet creation of Tajik ASSR (1924), upgraded to Tajik SSR (1929); Cyrillic replaces Persian</p>
-          <p><strong className="text-stone-900 dark:text-stone-50">1991 – 1997:</strong> Independence declared (Sept 9, 1991); Tajik Civil War (1992–1997); peace accord signed</p>
-          <p><strong className="text-stone-900 dark:text-stone-50">1997 – Present:</strong> Post-war reconstruction, nation-building, and cultural ties with Iran & Persian world</p>
+        <div className="mt-6 space-y-2 text-sm text-stone-600 dark:text-stone-400">
+          <p><strong className="text-stone-900 dark:text-stone-50">3000 BC – 7th Century AD</strong> • Achaemenid, Alexander, Parthian, Sassanid</p>
+          <p><strong className="text-stone-900 dark:text-stone-50">7th – 13th Century</strong> • Islamic Golden Age, Samanid Empire peak</p>
+          <p><strong className="text-stone-900 dark:text-stone-50">13th – 15th Century</strong> • Mongol invasions, Timurid Renaissance</p>
+          <p><strong className="text-stone-900 dark:text-stone-50">1868 – 1895</strong> • Russian expansion, border treaties with Persia</p>
+          <p><strong className="text-stone-900 dark:text-stone-50">1924 – 1929</strong> • Tajik ASSR created (1924), upgraded to Tajik SSR (1929)</p>
+          <p><strong className="text-stone-900 dark:text-stone-50">1991 – 1997</strong> • Independence declared, Tajik Civil War, peace accord</p>
+          <p><strong className="text-stone-900 dark:text-stone-50">1997 – Present</strong> • Post-war reconstruction and nation-building</p>
         </div>
       </ContentCard>
     </div>

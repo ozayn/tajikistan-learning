@@ -9,16 +9,78 @@ interface Phrase {
   english: string
 }
 
+interface NavSection {
+  id: Section
+  label: string
+  icon: (props: { className: string }) => JSX.Element
+}
+
+// Minimal monochrome SVG icons
+function HistoryIcon({ className }: { className: string }) {
+  return (
+    <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="10" strokeWidth="1.5" />
+      <path d="M12 6v6l4 2" strokeWidth="1.5" strokeLinecap="round" />
+    </svg>
+  )
+}
+
+function CultureIcon({ className }: { className: string }) {
+  return (
+    <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path d="M12 2c-2 0-3 2-3 4s1 3 3 3 3-1 3-3-1-4-3-4m0 9v1m0 0c-3 0-5 2-5 4v3h10v-3c0-2-2-4-5-4" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M4 20h16" strokeWidth="1.5" strokeLinecap="round" />
+    </svg>
+  )
+}
+
+function PoliticsIcon({ className }: { className: string }) {
+  return (
+    <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path d="M3 4h18v14H3z" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M3 4l9-2 9 2" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M12 4v14m-6-6h12" strokeWidth="1.5" strokeLinecap="round" />
+    </svg>
+  )
+}
+
+function LanguageIcon({ className }: { className: string }) {
+  return (
+    <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path d="M4 6h16M4 12h16M4 18h16" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M5 3v3m7-3v3m7-3v3" strokeWidth="1.5" strokeLinecap="round" />
+    </svg>
+  )
+}
+
+function CitiesIcon({ className }: { className: string }) {
+  return (
+    <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path d="M3 20h18M5 20V8h2v12m2-12v12h2V8m4-4v16h2V4m4 4v12h2V8m3-2v14h2V6" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  )
+}
+
+function PhotographyIcon({ className }: { className: string }) {
+  return (
+    <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <rect x="3" y="5" width="18" height="14" rx="2" strokeWidth="1.5" />
+      <circle cx="12" cy="12" r="3" strokeWidth="1.5" />
+      <path d="M18 8h.01" strokeWidth="1.5" strokeLinecap="round" />
+    </svg>
+  )
+}
+
 export default function App() {
   const [activeSection, setActiveSection] = useState<Section>('history')
 
-  const sections = [
-    { id: 'history' as Section, label: 'History', emoji: '⏰' },
-    { id: 'culture' as Section, label: 'Culture', emoji: '🎭' },
-    { id: 'politics' as Section, label: 'Politics', emoji: '🏛️' },
-    { id: 'language' as Section, label: 'Language', emoji: '📖' },
-    { id: 'cities' as Section, label: 'Cities', emoji: '🗺️' },
-    { id: 'photography' as Section, label: 'Photography', emoji: '📷' },
+  const sections: NavSection[] = [
+    { id: 'history', label: 'History', icon: HistoryIcon },
+    { id: 'culture', label: 'Culture', icon: CultureIcon },
+    { id: 'politics', label: 'Politics', icon: PoliticsIcon },
+    { id: 'language', label: 'Language', icon: LanguageIcon },
+    { id: 'cities', label: 'Cities', icon: CitiesIcon },
+    { id: 'photography', label: 'Photography', icon: PhotographyIcon },
   ]
 
   return (
@@ -35,20 +97,23 @@ export default function App() {
       <nav className="border-b border-stone-200 bg-white sticky top-0 z-10">
         <div className="max-w-4xl mx-auto px-6">
           <div className="flex overflow-x-auto gap-8">
-            {sections.map((section) => (
-              <button
-                key={section.id}
-                onClick={() => setActiveSection(section.id)}
-                className={`py-4 px-1 border-b-2 transition-all flex items-center gap-2 text-sm font-medium ${
-                  activeSection === section.id
-                    ? 'border-stone-900 text-stone-900'
-                    : 'border-transparent text-stone-500 hover:text-stone-700'
-                }`}
-              >
-                <span className="text-base">{section.emoji}</span>
-                {section.label}
-              </button>
-            ))}
+            {sections.map((section) => {
+              const Icon = section.icon
+              return (
+                <button
+                  key={section.id}
+                  onClick={() => setActiveSection(section.id)}
+                  className={`py-4 px-1 border-b-2 transition-all flex items-center gap-2 text-sm font-medium ${
+                    activeSection === section.id
+                      ? 'border-stone-900 text-stone-900'
+                      : 'border-transparent text-stone-500 hover:text-stone-700'
+                  }`}
+                >
+                  <Icon className="w-4 h-4" />
+                  {section.label}
+                </button>
+              )
+            })}
           </div>
         </div>
       </nav>

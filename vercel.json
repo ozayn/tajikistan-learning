@@ -1,7 +1,4 @@
 {
   "buildCommand": "npm run build",
-  "outputDirectory": "dist",
-  "env": {
-    "VITE_OPENAI_KEY": "@tajikistan-openai-key"
-  }
+  "outputDirectory": "dist"
 }

@@ -690,10 +690,41 @@ function FlashcardsSection() {
 function PhraseRow({ phrase }: { phrase: Phrase }) {
   const [isPlaying, setIsPlaying] = useState(false)
 
+  const getCacheKey = (text: string) => `audio_cache_${text}`
+
+  const getAudioFromCache = (text: string): string | null => {
+    try {
+      const cached = localStorage.getItem(getCacheKey(text))
+      return cached
+    } catch {
+      return null
+    }
+  }
+
+  const saveAudioToCache = (text: string, dataUrl: string) => {
+    try {
+      localStorage.setItem(getCacheKey(text), dataUrl)
+    } catch (error) {
+      console.warn('Failed to cache audio:', error)
+    }
+  }
+
   const playAudio = async () => {
     if (!phrase.transliteration) return
     setIsPlaying(true)
     try {
+      const cacheKey = phrase.transliteration
+
+      // Check cache first
+      const cachedAudio = getAudioFromCache(cacheKey)
+      if (cachedAudio) {
+        const audio = new Audio(cachedAudio)
+        audio.play()
+        setIsPlaying(false)
+        return
+      }
+
+      // If not cached, fetch from API
       const apiKey = import.meta.env.VITE_OPENAI_KEY
       if (!apiKey) {
         console.log('No OpenAI key configured. Audio unavailable.')
@@ -718,12 +749,20 @@ function PhraseRow({ phrase }: { phrase: Phrase }) {
         const arrayBuffer = await response.arrayBuffer()
         const blob = new Blob([arrayBuffer], { type: 'audio/mpeg' })
         const url = URL.createObjectURL(blob)
-        const audio = new Audio(url)
-        audio.play()
+
+        // Convert to data URL for caching
+        const reader = new FileReader()
+        reader.onload = () => {
+          const dataUrl = reader.result as string
+          saveAudioToCache(cacheKey, dataUrl)
+          const audio = new Audio(dataUrl)
+          audio.play()
+          setIsPlaying(false)
+        }
+        reader.readAsDataURL(blob)
       }
     } catch (error) {
       console.error('Audio playback failed:', error)
-    } finally {
       setIsPlaying(false)
     }
   }

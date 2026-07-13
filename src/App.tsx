@@ -15,71 +15,33 @@ interface NavSection {
   icon: (props: { className: string }) => JSX.Element
 }
 
-// Minimal monochrome icons - ultra-reductive design
+// Minimal monochrome text icons
 function HistoryIcon({ className }: { className: string }) {
-  return (
-    <svg className={className} fill="currentColor" viewBox="0 0 24 24">
-      <circle cx="12" cy="12" r="10" opacity="0.2"/>
-      <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" strokeWidth="0.5"/>
-      <path d="M12 7v5l4 2" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round"/>
-    </svg>
-  )
+  return <span className={className}>◯</span>
 }
 
 function CultureIcon({ className }: { className: string }) {
-  return (
-    <svg className={className} fill="currentColor" viewBox="0 0 24 24">
-      <circle cx="12" cy="8" r="2"/>
-      <path d="M12 10v3M8 13h8c0 3-2 5-4 5s-4-2-4-5Z" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"/>
-    </svg>
-  )
+  return <span className={className}>◉</span>
 }
 
 function PoliticsIcon({ className }: { className: string }) {
-  return (
-    <svg className={className} fill="currentColor" viewBox="0 0 24 24">
-      <path d="M12 2l3 5h5l-4 4 2 5-6-4-6 4 2-5-4-4h5l3-5Z" fill="none" stroke="currentColor" strokeWidth="1" strokeLinejoin="round"/>
-    </svg>
-  )
+  return <span className={className}>⬚</span>
 }
 
 function LanguageIcon({ className }: { className: string }) {
-  return (
-    <svg className={className} fill="currentColor" viewBox="0 0 24 24">
-      <path d="M4 6h16M4 12h16M4 18h16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-    </svg>
-  )
+  return <span className={className}>≡</span>
 }
 
 function CitiesIcon({ className }: { className: string }) {
-  return (
-    <svg className={className} fill="currentColor" viewBox="0 0 24 24">
-      <rect x="3" y="10" width="2" height="10" fill="currentColor"/>
-      <rect x="7" y="6" width="2" height="14" fill="currentColor"/>
-      <rect x="11" y="8" width="2" height="12" fill="currentColor"/>
-      <rect x="15" y="12" width="2" height="8" fill="currentColor"/>
-      <rect x="19" y="7" width="2" height="13" fill="currentColor"/>
-    </svg>
-  )
+  return <span className={className}>▢▢</span>
 }
 
 function PhotographyIcon({ className }: { className: string }) {
-  return (
-    <svg className={className} fill="currentColor" viewBox="0 0 24 24">
-      <rect x="3" y="5" width="18" height="14" rx="1" fill="none" stroke="currentColor" strokeWidth="1"/>
-      <circle cx="12" cy="12" r="2.5" fill="none" stroke="currentColor" strokeWidth="1"/>
-      <circle cx="17" cy="8" r="0.5" fill="currentColor"/>
-    </svg>
-  )
+  return <span className={className}>□</span>
 }
 
 function FlashcardsIcon({ className }: { className: string }) {
-  return (
-    <svg className={className} fill="currentColor" viewBox="0 0 24 24">
-      <rect x="3" y="6" width="9" height="9" rx="0.5" fill="none" stroke="currentColor" strokeWidth="1"/>
-      <rect x="12" y="9" width="9" height="9" rx="0.5" fill="none" stroke="currentColor" strokeWidth="1" opacity="0.5"/>
-    </svg>
-  )
+  return <span className={className}>▭▭</span>
 }
 
 export default function App() {

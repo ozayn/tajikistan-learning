@@ -523,7 +523,7 @@ function PhraseRow({ phrase }: { phrase: Phrase }) {
     if (!phrase.transliteration) return
     setIsPlaying(true)
     try {
-      const apiKey = process.env.REACT_APP_OPENAI_KEY
+      const apiKey = import.meta.env.VITE_OPENAI_KEY
       if (!apiKey) {
         console.log('No OpenAI key configured. Audio unavailable.')
         setIsPlaying(false)

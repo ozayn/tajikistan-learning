@@ -166,8 +166,8 @@ export default function App() {
         </aside>
 
         {/* Content */}
-        <main className="flex-1 overflow-y-auto pt-16 sm:pt-0 px-4 sm:px-8 py-8 sm:py-16 text-base">
-          <div className="max-w-3xl">
+        <main className="flex-1 overflow-y-auto pt-16 sm:pt-0 px-4 sm:px-8 py-8 sm:py-16 landscape:py-2 landscape:px-2 text-base">
+          <div className="max-w-3xl landscape:max-w-full">
             {activeSection === 'history' && <HistorySection />}
             {activeSection === 'culture' && <CultureSection />}
             {activeSection === 'politics' && <PoliticsSection />}
@@ -719,10 +719,10 @@ function FlashcardsSection() {
 
   return (
     <div className="space-y-8">
-      <h2 className="text-4xl font-light text-stone-900 dark:text-stone-50 mb-10">Flashcards</h2>
+      <h2 className="text-4xl font-light text-stone-900 dark:text-stone-50 mb-10 flashcard-title">Flashcards</h2>
 
       {/* Set Selector */}
-      <div className="flex gap-3 flex-wrap">
+      <div className="flex gap-3 flex-wrap flashcard-set-selector">
         {(['language', 'cities', 'history'] as const).map((set) => (
           <button
             key={set}
@@ -743,7 +743,7 @@ function FlashcardsSection() {
       </div>
 
       {/* Flashcard */}
-      <div className="flex flex-col items-center gap-4 sm:gap-8 w-full">
+      <div className="flex flex-col items-center gap-4 sm:gap-8 w-full flashcard-container">
         <div
           onClick={() => setIsFlipped(!isFlipped)}
           className="w-full max-w-2xl h-56 sm:h-80 cursor-pointer perspective touch-none"
@@ -804,14 +804,14 @@ function FlashcardsSection() {
         </div>
 
         {/* Progress */}
-        <div className="text-center">
+        <div className="text-center flashcard-progress">
           <p className="text-base sm:text-lg text-stone-700 dark:text-stone-300 font-medium">
             {cardIndex + 1} / {cards.length}
           </p>
         </div>
 
         {/* Controls - Optimized for mobile */}
-        <div className="flex gap-3 sm:gap-4 flex-wrap justify-center w-full px-2">
+        <div className="flex gap-3 sm:gap-4 flex-wrap justify-center w-full px-2 flashcard-controls">
           <button
             onClick={prevCard}
             className="flex-1 sm:flex-none px-4 sm:px-6 py-2.5 sm:py-3 bg-stone-100 dark:bg-stone-900 hover:bg-stone-200 dark:hover:bg-stone-800 active:bg-stone-300 dark:active:bg-stone-700 rounded-lg transition-all duration-200 font-medium text-sm sm:text-base min-h-11 border border-stone-200 dark:border-stone-800"
@@ -832,7 +832,7 @@ function FlashcardsSection() {
           </button>
         </div>
 
-        <p className="text-xs sm:text-sm text-stone-500 dark:text-stone-400 text-center px-2">Use arrow keys or tap to navigate • Click card to flip</p>
+        <p className="text-xs sm:text-sm text-stone-500 dark:text-stone-400 text-center px-2 flashcard-hint">Use arrow keys or tap to navigate • Click card to flip</p>
       </div>
     </div>
   )

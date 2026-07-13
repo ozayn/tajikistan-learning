@@ -23,6 +23,15 @@ export default {
       fontFamily: {
         sans: ['system-ui', 'sans-serif'],
       },
+      fontSize: {
+        base: '1.0625rem', // 17px - more comfortable body text
+        sm: '0.9375rem', // 15px
+        lg: '1.125rem', // 18px
+      },
+      lineHeight: {
+        relaxed: '1.75', // Better spacing for reading
+        loose: '2', // For headings
+      },
     },
   },
   plugins: [],

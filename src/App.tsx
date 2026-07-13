@@ -87,9 +87,9 @@ export default function App() {
     <div className="min-h-screen bg-stone-50">
       {/* Header */}
       <header className="border-b border-stone-200">
-        <div className="max-w-4xl mx-auto px-6 py-12">
-          <h1 className="text-5xl font-light text-stone-900 mb-2">Tajikistan</h1>
-          <p className="text-lg text-stone-600 font-light">A learning journey through history, culture, and language</p>
+        <div className="max-w-4xl mx-auto px-6 py-16">
+          <h1 className="text-6xl font-light text-stone-900 mb-3">Tajikistan</h1>
+          <p className="text-xl text-stone-600 font-light leading-relaxed">A learning journey through history, culture, and language</p>
         </div>
       </header>
 
@@ -119,7 +119,7 @@ export default function App() {
       </nav>
 
       {/* Content */}
-      <main className="max-w-4xl mx-auto px-6 py-12">
+      <main className="max-w-4xl mx-auto px-6 py-16 text-base">
         {activeSection === 'history' && <HistorySection />}
         {activeSection === 'culture' && <CultureSection />}
         {activeSection === 'politics' && <PoliticsSection />}
@@ -134,7 +134,7 @@ export default function App() {
 function HistorySection() {
   return (
     <div className="space-y-8">
-      <h2 className="text-3xl font-light text-stone-900 mb-8">History of Tajikistan</h2>
+      <h2 className="text-4xl font-light text-stone-900 mb-10">History of Tajikistan</h2>
 
       <ContentCard title="Ancient & Medieval Periods">
         <p>
@@ -177,7 +177,7 @@ function HistorySection() {
 function CultureSection() {
   return (
     <div className="space-y-8">
-      <h2 className="text-3xl font-light text-stone-900 mb-8">Culture & Traditions</h2>
+      <h2 className="text-4xl font-light text-stone-900 mb-10">Culture & Traditions</h2>
 
       <ContentCard title="Language & Identity">
         <p>
@@ -235,7 +235,7 @@ function CultureSection() {
 function PoliticsSection() {
   return (
     <div className="space-y-8">
-      <h2 className="text-3xl font-light text-stone-900 mb-8">Politics & Government</h2>
+      <h2 className="text-4xl font-light text-stone-900 mb-10">Politics & Government</h2>
 
       <ContentCard title="System of Government">
         <p>
@@ -296,7 +296,7 @@ function LanguageSection() {
 
   return (
     <div className="space-y-8">
-      <h2 className="text-3xl font-light text-stone-900 mb-8">Language & Expressions</h2>
+      <h2 className="text-4xl font-light text-stone-900 mb-10">Language & Expressions</h2>
 
       <ContentCard title="Tajik Language Overview">
         <p>
@@ -377,7 +377,7 @@ function LanguageSection() {
 function CitiesSection() {
   return (
     <div className="space-y-8">
-      <h2 className="text-3xl font-light text-stone-900 mb-8">Three Cities</h2>
+      <h2 className="text-4xl font-light text-stone-900 mb-10">Three Cities</h2>
 
       <ContentCard title="Dushanbe (Capital)">
         <p className="font-medium text-stone-700 mb-3">Population: ~850,000 | Elevation: 800m</p>
@@ -464,7 +464,7 @@ function CitiesSection() {
 function PhotographySection() {
   return (
     <div className="space-y-8">
-      <h2 className="text-3xl font-light text-stone-900 mb-8">Photography & Your Workshop</h2>
+      <h2 className="text-4xl font-light text-stone-900 mb-10">Photography & Your Workshop</h2>
 
       <ContentCard title="Photographic Opportunities">
         <p>
@@ -558,18 +558,18 @@ function PhraseRow({ phrase }: { phrase: Phrase }) {
   }
 
   return (
-    <div className="flex items-start justify-between bg-stone-50 p-3 rounded border border-stone-100">
+    <div className="flex items-start justify-between bg-stone-50 p-4 rounded border border-stone-100">
       <div className="flex-1 min-w-0">
-        <div className="font-mono text-sm text-stone-900 mb-1">{phrase.tajikCyrillic}</div>
-        <div className="text-xs text-stone-600">{phrase.transliteration}</div>
-        <div className="text-xs text-stone-500 italic mt-1">{phrase.farsi}</div>
+        <div className="font-mono text-base text-stone-900 mb-2 font-medium">{phrase.tajikCyrillic}</div>
+        <div className="text-sm text-stone-600">{phrase.transliteration}</div>
+        <div className="text-sm text-stone-500 italic mt-2">{phrase.farsi}</div>
       </div>
-      <div className="flex items-center gap-3 ml-4 flex-shrink-0">
-        <div className="text-sm text-stone-700">{phrase.english}</div>
+      <div className="flex items-center gap-4 ml-4 flex-shrink-0">
+        <div className="text-sm text-stone-700 font-medium">{phrase.english}</div>
         <button
           onClick={playAudio}
           disabled={isPlaying}
-          className="text-sm bg-stone-200 hover:bg-stone-300 disabled:bg-stone-300 px-2 py-1 rounded transition-colors"
+          className="text-base bg-stone-200 hover:bg-stone-300 disabled:bg-stone-300 px-3 py-2 rounded transition-colors"
           title="Play pronunciation (requires OpenAI API key)"
         >
           {isPlaying ? '⏸' : '🔊'}
@@ -582,15 +582,15 @@ function PhraseRow({ phrase }: { phrase: Phrase }) {
 function ContentCard({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div className="bg-white rounded-lg border border-stone-200 p-8">
-      <h3 className="text-xl font-medium text-stone-900 mb-4">{title}</h3>
-      <div className="space-y-4 text-stone-700 leading-relaxed">{children}</div>
+      <h3 className="text-2xl font-light text-stone-900 mb-6">{title}</h3>
+      <div className="space-y-5 text-base text-stone-700 leading-relaxed">{children}</div>
     </div>
   )
 }
 
 function FarsiCallout({ word, farsi, note }: { word: string; farsi: string; note?: string }) {
   return (
-    <div className="mt-4 pl-4 border-l-2 border-stone-300 text-sm text-stone-600 italic">
+    <div className="mt-5 pl-5 border-l-2 border-stone-300 text-base text-stone-600 italic leading-relaxed">
       <p>
         <strong>In Farsi:</strong> {word} → {farsi} {note && `(${note})`}
       </p>

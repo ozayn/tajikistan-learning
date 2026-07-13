@@ -143,7 +143,7 @@ export default function App() {
         )}
 
         {/* Desktop Sidebar */}
-        <aside className="hidden sm:flex sm:flex-col w-64 border-r border-stone-200 dark:border-stone-800 bg-white dark:bg-stone-900 flex-shrink-0 overflow-y-auto">
+        <aside className="hidden lg:flex lg:flex-col w-64 border-r border-stone-200 dark:border-stone-800 bg-white dark:bg-stone-900 flex-shrink-0 overflow-y-auto">
           <div className="p-6 space-y-1 sticky top-0">
             {sections.map((section) => {
               const Icon = section.icon

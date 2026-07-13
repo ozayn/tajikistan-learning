@@ -220,61 +220,133 @@ function HistorySection() {
       </ContentCard>
 
       <ContentCard title="Independence & Modern Era (1991-Present)">
-        <p>
-          Tajikistan declared independence on September 9, 1991, following the collapse of the Soviet Union. This was quickly followed by a devastating civil war (1992-1997) between government forces and various opposition groups, causing 50,000+ deaths and displacing hundreds of thousands.
-        </p>
-        <p className="mt-4">
-          Since the 1997 peace accord, Tajikistan has worked toward stability and development. The government has focused on nation-building, though challenges remain including economic development, regional tensions, and political freedoms.
-        </p>
+        <div className="space-y-4">
+          <div className="bg-stone-50 dark:bg-stone-900 px-4 py-3 rounded-lg border border-stone-200 dark:border-stone-800">
+            <p className="text-lg font-semibold text-stone-900 dark:text-stone-50">September 9, 1991 — Independence</p>
+            <p className="text-sm text-stone-600 dark:text-stone-400 mt-1">Soviet Union collapse; Tajikistan declared independent</p>
+          </div>
+
+          <div>
+            <p className="font-semibold text-stone-900 dark:text-stone-50 mb-2">Tajik Civil War (1992-1997)</p>
+            <ul className="space-y-2 ml-4 text-sm">
+              <li>• 50,000+ deaths</li>
+              <li>• Hundreds of thousands displaced</li>
+              <li>• Government vs. opposition groups</li>
+            </ul>
+          </div>
+
+          <div>
+            <p className="font-semibold text-stone-900 dark:text-stone-50 mb-2">Since 1997 Peace Accord</p>
+            <ul className="space-y-2 ml-4 text-sm">
+              <li>• Post-war reconstruction</li>
+              <li>• Nation-building initiatives</li>
+              <li>• Economic development</li>
+              <li>• Maintenance of regional stability</li>
+            </ul>
+          </div>
+        </div>
       </ContentCard>
 
       <ContentCard title="Tajikistan & Iran: A Shared Heritage, Separate Nations">
-        <p>
-          Tajikistan and Iran share a profound cultural and linguistic heritage, both rooted in Persian civilization. However, they became separate political entities through colonial history rather than an active "separation."
-        </p>
-        <p className="mt-4">
-          <strong>The Historical Division:</strong> During the 19th century "Great Game" between the Russian and British empires, the region was divided:
-        </p>
-        <ul className="mt-3 space-y-2 ml-4">
-          <li><strong>1868-1900s:</strong> Russia expanded southward, conquering Central Asian territories and establishing the Turkestan Governor-Generalship</li>
-          <li><strong>1881 & 1895:</strong> Russia and Persia (Iran) signed treaties defining their borders. The Amu Darya River became the northern boundary of Persia</li>
-          <li><strong>1924:</strong> The Soviet Union created the Tajik ASSR (Autonomous Soviet Socialist Republic), formally separating Tajik-speaking territories from Iran</li>
-          <li><strong>1929:</strong> Tajik ASSR upgraded to a full SSR (Soviet Socialist Republic)</li>
-        </ul>
-        <p className="mt-4">
-          Today, Tajikistan and Iran remain separate nations, though cultural ties remain strong. Both celebrate Nowruz (Persian New Year), speak related languages, and share literary and artistic traditions. The border between them is defined by international treaties, and relations are generally cordial, with trade and cultural exchanges.
-        </p>
+        <div className="space-y-5">
+          <div className="bg-stone-50 dark:bg-stone-900 px-4 py-3 rounded-lg border border-stone-200 dark:border-stone-800">
+            <p className="font-semibold text-stone-900 dark:text-stone-50">Shared Persian Civilization</p>
+            <ul className="space-y-1 ml-4 text-sm mt-2">
+              <li>• Same Persian language roots</li>
+              <li>• Shared cultural heritage</li>
+              <li>• Joint literary & artistic traditions</li>
+            </ul>
+          </div>
+
+          <div>
+            <p className="text-lg font-semibold text-stone-900 dark:text-stone-50 mb-3">How Did They Separate?</p>
+            <div className="space-y-3">
+              <div className="border-l-4 border-stone-300 dark:border-stone-700 pl-3 py-2">
+                <p className="font-semibold text-stone-900 dark:text-stone-50">1868-1900s: Russian Expansion</p>
+                <p className="text-sm text-stone-600 dark:text-stone-400">Russia conquers Central Asia; establishes Turkestan Governor-Generalship</p>
+              </div>
+              <div className="border-l-4 border-stone-300 dark:border-stone-700 pl-3 py-2">
+                <p className="font-semibold text-stone-900 dark:text-stone-50">1881 & 1895: Border Treaties</p>
+                <p className="text-sm text-stone-600 dark:text-stone-400">Russia-Persia treaties define Amu Darya River as boundary</p>
+              </div>
+              <div className="border-l-4 border-stone-300 dark:border-stone-700 pl-3 py-2">
+                <p className="font-semibold text-stone-900 dark:text-stone-50">1924-1929: Soviet Creation</p>
+                <p className="text-sm text-stone-600 dark:text-stone-400">Tajik ASSR created (1924), upgraded to Tajik SSR (1929) — formal political separation</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-stone-50 dark:bg-stone-900 px-4 py-3 rounded-lg border border-stone-200 dark:border-stone-800">
+            <p className="font-semibold text-stone-900 dark:text-stone-50 mb-2">Today: Separate Nations, Strong Ties</p>
+            <ul className="space-y-1 ml-4 text-sm">
+              <li>• Both celebrate Nowruz (Persian New Year)</li>
+              <li>• Speak related languages (Tajik ≈ Farsi)</li>
+              <li>• Share literary traditions & poetry</li>
+              <li>• Cordial relations & cultural exchanges</li>
+            </ul>
+          </div>
+        </div>
       </ContentCard>
 
       <ContentCard title="Historical Timeline">
-        <div className="space-y-4 mt-4">
-          <div className="border-l-2 border-stone-300 dark:border-stone-700 pl-4 py-2">
-            <p className="font-semibold text-stone-900 dark:text-stone-50">3000 BC - 7th Century AD</p>
-            <p className="text-sm text-stone-600 dark:text-stone-400">Ancient period: Achaemenid Empire (550-330 BC), Alexander the Great (330 BC), Parthian & Sassanid Empires</p>
+        <div className="space-y-3 mt-4">
+          <div className="border-l-4 border-stone-300 dark:border-stone-700 pl-4 py-2">
+            <p className="text-base font-bold text-stone-900 dark:text-stone-50">3000 BC – 7th Century AD</p>
+            <ul className="text-sm text-stone-600 dark:text-stone-400 mt-1 space-y-1 ml-4">
+              <li>• Achaemenid Empire (550–330 BC)</li>
+              <li>• Alexander the Great (330 BC)</li>
+              <li>• Parthian & Sassanid Empires</li>
+            </ul>
           </div>
-          <div className="border-l-2 border-stone-300 dark:border-stone-700 pl-4 py-2">
-            <p className="font-semibold text-stone-900 dark:text-stone-50">7th - 13th Century</p>
-            <p className="text-sm text-stone-600 dark:text-stone-400">Islamic Golden Age: Samanid Empire (9th-10th century) — peak of Persian-Tajik civilization, center of science & arts</p>
+          <div className="border-l-4 border-stone-300 dark:border-stone-700 pl-4 py-2">
+            <p className="text-base font-bold text-stone-900 dark:text-stone-50">7th – 13th Century</p>
+            <ul className="text-sm text-stone-600 dark:text-stone-400 mt-1 space-y-1 ml-4">
+              <li>• Islamic Golden Age</li>
+              <li>• Samanid Empire (9th–10th century) — Peak of Persian-Tajik civilization</li>
+              <li>• Center of science & arts</li>
+            </ul>
           </div>
-          <div className="border-l-2 border-stone-300 dark:border-stone-700 pl-4 py-2">
-            <p className="font-semibold text-stone-900 dark:text-stone-50">13th - 15th Century</p>
-            <p className="text-sm text-stone-600 dark:text-stone-400">Mongol invasions (13th century), Timurid Renaissance (14th-15th century) with cultural flowering</p>
+          <div className="border-l-4 border-stone-300 dark:border-stone-700 pl-4 py-2">
+            <p className="text-base font-bold text-stone-900 dark:text-stone-50">13th – 15th Century</p>
+            <ul className="text-sm text-stone-600 dark:text-stone-400 mt-1 space-y-1 ml-4">
+              <li>• Mongol invasions (13th century)</li>
+              <li>• Timurid Renaissance (14th–15th century)</li>
+              <li>• Cultural flowering & artistic revival</li>
+            </ul>
           </div>
-          <div className="border-l-2 border-stone-300 dark:border-stone-700 pl-4 py-2">
-            <p className="font-semibold text-stone-900 dark:text-stone-50">1868 - 1895</p>
-            <p className="text-sm text-stone-600 dark:text-stone-400">Russian expansion: Russia conquers Central Asian territories; border treaties with Persia define Amu Darya as boundary</p>
+          <div className="border-l-4 border-stone-300 dark:border-stone-700 pl-4 py-2">
+            <p className="text-base font-bold text-stone-900 dark:text-stone-50">1868 – 1895</p>
+            <ul className="text-sm text-stone-600 dark:text-stone-400 mt-1 space-y-1 ml-4">
+              <li>• Russian expansion into Central Asia</li>
+              <li>• Turkestan Governor-Generalship established</li>
+              <li>• Border treaties with Persia (1881, 1895)</li>
+              <li>• Amu Darya River becomes boundary</li>
+            </ul>
           </div>
-          <div className="border-l-2 border-stone-300 dark:border-stone-700 pl-4 py-2">
-            <p className="font-semibold text-stone-900 dark:text-stone-50">1924 - 1929</p>
-            <p className="text-sm text-stone-600 dark:text-stone-400">Soviet period: Creation of Tajik ASSR (1924), elevated to Tajik SSR (1929); Cyrillic script replaces Persian script</p>
+          <div className="border-l-4 border-stone-300 dark:border-stone-700 pl-4 py-2">
+            <p className="text-base font-bold text-stone-900 dark:text-stone-50">1924 – 1929</p>
+            <ul className="text-sm text-stone-600 dark:text-stone-400 mt-1 space-y-1 ml-4">
+              <li>• 1924: Tajik ASSR (Autonomous Soviet Socialist Republic) created</li>
+              <li>• 1929: Upgraded to Tajik SSR (Soviet Socialist Republic)</li>
+              <li>• Cyrillic script replaces Persian script</li>
+            </ul>
           </div>
-          <div className="border-l-2 border-stone-300 dark:border-stone-700 pl-4 py-2">
-            <p className="font-semibold text-stone-900 dark:text-stone-50">1991 - 1997</p>
-            <p className="text-sm text-stone-600 dark:text-stone-400">Independence (Sept 9, 1991): Dissolution of Soviet Union; Tajik Civil War (1992-1997)</p>
+          <div className="border-l-4 border-stone-300 dark:border-stone-700 pl-4 py-2">
+            <p className="text-base font-bold text-stone-900 dark:text-stone-50">1991 – 1997</p>
+            <ul className="text-sm text-stone-600 dark:text-stone-400 mt-1 space-y-1 ml-4">
+              <li>• September 9, 1991: Independence declared</li>
+              <li>• Soviet Union dissolves</li>
+              <li>• Tajik Civil War (1992–1997)</li>
+              <li>• 1997: Peace accord signed</li>
+            </ul>
           </div>
-          <div className="border-l-2 border-stone-300 dark:border-stone-700 pl-4 py-2">
-            <p className="font-semibold text-stone-900 dark:text-stone-50">1997 - Present</p>
-            <p className="text-sm text-stone-600 dark:text-stone-400">Peace & nation-building: Post-war reconstruction; development; maintenance of cultural ties with Iran and broader Persian world</p>
+          <div className="border-l-4 border-stone-300 dark:border-stone-700 pl-4 py-2">
+            <p className="text-base font-bold text-stone-900 dark:text-stone-50">1997 – Present</p>
+            <ul className="text-sm text-stone-600 dark:text-stone-400 mt-1 space-y-1 ml-4">
+              <li>• Post-war reconstruction</li>
+              <li>• Nation-building & development</li>
+              <li>• Maintenance of cultural ties with Iran & Persian world</li>
+            </ul>
           </div>
         </div>
       </ContentCard>

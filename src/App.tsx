@@ -15,68 +15,69 @@ interface NavSection {
   icon: (props: { className: string }) => JSX.Element
 }
 
-// Minimal monochrome SVG icons
+// Minimal monochrome icons - ultra-reductive design
 function HistoryIcon({ className }: { className: string }) {
   return (
-    <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <circle cx="12" cy="12" r="10" strokeWidth="1.5" />
-      <path d="M12 6v6l4 2" strokeWidth="1.5" strokeLinecap="round" />
+    <svg className={className} fill="currentColor" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="10" opacity="0.2"/>
+      <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" strokeWidth="0.5"/>
+      <path d="M12 7v5l4 2" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round"/>
     </svg>
   )
 }
 
 function CultureIcon({ className }: { className: string }) {
   return (
-    <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path d="M12 2c-2 0-3 2-3 4s1 3 3 3 3-1 3-3-1-4-3-4m0 9v1m0 0c-3 0-5 2-5 4v3h10v-3c0-2-2-4-5-4" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M4 20h16" strokeWidth="1.5" strokeLinecap="round" />
+    <svg className={className} fill="currentColor" viewBox="0 0 24 24">
+      <circle cx="12" cy="8" r="2"/>
+      <path d="M12 10v3M8 13h8c0 3-2 5-4 5s-4-2-4-5Z" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"/>
     </svg>
   )
 }
 
 function PoliticsIcon({ className }: { className: string }) {
   return (
-    <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path d="M3 4h18v14H3z" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M3 4l9-2 9 2" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M12 4v14m-6-6h12" strokeWidth="1.5" strokeLinecap="round" />
+    <svg className={className} fill="currentColor" viewBox="0 0 24 24">
+      <path d="M12 2l3 5h5l-4 4 2 5-6-4-6 4 2-5-4-4h5l3-5Z" fill="none" stroke="currentColor" strokeWidth="1" strokeLinejoin="round"/>
     </svg>
   )
 }
 
 function LanguageIcon({ className }: { className: string }) {
   return (
-    <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path d="M4 6h16M4 12h16M4 18h16" strokeWidth="1.5" strokeLinecap="round" />
-      <path d="M5 3v3m7-3v3m7-3v3" strokeWidth="1.5" strokeLinecap="round" />
+    <svg className={className} fill="currentColor" viewBox="0 0 24 24">
+      <path d="M4 6h16M4 12h16M4 18h16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
     </svg>
   )
 }
 
 function CitiesIcon({ className }: { className: string }) {
   return (
-    <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path d="M3 20h18M5 20V8h2v12m2-12v12h2V8m4-4v16h2V4m4 4v12h2V8m3-2v14h2V6" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    <svg className={className} fill="currentColor" viewBox="0 0 24 24">
+      <rect x="3" y="10" width="2" height="10" fill="currentColor"/>
+      <rect x="7" y="6" width="2" height="14" fill="currentColor"/>
+      <rect x="11" y="8" width="2" height="12" fill="currentColor"/>
+      <rect x="15" y="12" width="2" height="8" fill="currentColor"/>
+      <rect x="19" y="7" width="2" height="13" fill="currentColor"/>
     </svg>
   )
 }
 
 function PhotographyIcon({ className }: { className: string }) {
   return (
-    <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <rect x="3" y="5" width="18" height="14" rx="2" strokeWidth="1.5" />
-      <circle cx="12" cy="12" r="3" strokeWidth="1.5" />
-      <path d="M18 8h.01" strokeWidth="1.5" strokeLinecap="round" />
+    <svg className={className} fill="currentColor" viewBox="0 0 24 24">
+      <rect x="3" y="5" width="18" height="14" rx="1" fill="none" stroke="currentColor" strokeWidth="1"/>
+      <circle cx="12" cy="12" r="2.5" fill="none" stroke="currentColor" strokeWidth="1"/>
+      <circle cx="17" cy="8" r="0.5" fill="currentColor"/>
     </svg>
   )
 }
 
 function FlashcardsIcon({ className }: { className: string }) {
   return (
-    <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <rect x="3" y="6" width="18" height="12" rx="1" strokeWidth="1.5" />
-      <path d="M3 10h18M12 10v8" strokeWidth="1.5" strokeLinecap="round" />
-      <path d="M7 14h2M15 14h2" strokeWidth="1.5" strokeLinecap="round" />
+    <svg className={className} fill="currentColor" viewBox="0 0 24 24">
+      <rect x="3" y="6" width="9" height="9" rx="0.5" fill="none" stroke="currentColor" strokeWidth="1"/>
+      <rect x="12" y="9" width="9" height="9" rx="0.5" fill="none" stroke="currentColor" strokeWidth="1" opacity="0.5"/>
     </svg>
   )
 }

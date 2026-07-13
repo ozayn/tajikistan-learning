@@ -2,6 +2,13 @@ import { useState } from 'react'
 
 type Section = 'history' | 'culture' | 'politics' | 'language' | 'cities' | 'photography'
 
+interface Phrase {
+  tajikCyrillic: string
+  transliteration: string
+  farsi: string
+  english: string
+}
+
 export default function App() {
   const [activeSection, setActiveSection] = useState<Section>('history')
 
@@ -200,49 +207,84 @@ function PoliticsSection() {
 }
 
 function LanguageSection() {
+  const greetings: Phrase[] = [
+    { tajikCyrillic: 'Ассалому алайкум', transliteration: 'Assalomu alaikum', farsi: 'السلام علیکم', english: 'Peace be upon you' },
+    { tajikCyrillic: 'Лабас', transliteration: 'Labas', farsi: 'سلام', english: 'Hello (informal)' },
+    { tajikCyrillic: 'Хуш омадӣ', transliteration: 'Khush omadi', farsi: 'خوش آمدید', english: 'Welcome' },
+  ]
+
+  const courtesy: Phrase[] = [
+    { tajikCyrillic: 'Мехмон', transliteration: 'Mehmoni', farsi: 'مهمان', english: 'Guest' },
+    { tajikCyrillic: 'Рахмат', transliteration: 'Rahmat', farsi: 'رحمت', english: 'Thank you' },
+    { tajikCyrillic: 'Илхос', transliteration: 'Ilhos', farsi: 'بخشش', english: 'Excuse me' },
+    { tajikCyrillic: 'Бале', transliteration: 'Bale', farsi: 'بله', english: 'Yes' },
+    { tajikCyrillic: 'Не', transliteration: 'Neh', farsi: 'نه', english: 'No' },
+  ]
+
+  const words: Phrase[] = [
+    { tajikCyrillic: 'Об', transliteration: 'Ov', farsi: 'آب', english: 'Water' },
+    { tajikCyrillic: 'Нон', transliteration: 'Non', farsi: 'نان', english: 'Bread' },
+    { tajikCyrillic: 'Хонавода', transliteration: 'Khonadon', farsi: 'خانواده', english: 'Family' },
+    { tajikCyrillic: 'Дост', transliteration: 'Dost', farsi: 'دوست', english: 'Friend' },
+    { tajikCyrillic: 'Мухаббат', transliteration: 'Muhabbat', farsi: 'محبت', english: 'Love' },
+  ]
+
   return (
     <div className="space-y-8">
       <h2 className="text-3xl font-light text-stone-900 mb-8">Language & Expressions</h2>
 
       <ContentCard title="Tajik Language Overview">
         <p>
-          Tajik is a Persian language (nearly identical to Dari, spoken in Afghanistan). It's an Indo-European language with Arabic loanwords due to Islamization. In Tajikistan, it's written in Cyrillic script (unlike Iran's Persian, which uses the Persian script).
+          Tajik is a Persian language (nearly identical to Dari, spoken in Afghanistan). It's an Indo-European language with Arabic loanwords due to Islamization. <strong>In Tajikistan, it's written in Cyrillic script</strong> (unlike Iran's Persian, which uses the Persian script)—much like Serbian!
         </p>
         <FarsiCallout word="Tajik" farsi="تاجیکی" note="Mutually intelligible with Farsi; minor vocabulary differences" />
+        <p className="mt-4 text-sm text-stone-600">
+          <strong>Cyrillic Guide:</strong> If you know Serbian Cyrillic, you'll recognize many letters. The main differences are a few additional letters (Ғ, Ӣ, Ӯ, Ҳ) used in Tajik for Persian sounds.
+        </p>
       </ContentCard>
 
       <ContentCard title="Common Phrases & Cognates">
-        <div className="space-y-4">
+        <div className="space-y-6">
           <div>
-            <p className="font-medium text-stone-900">Greetings</p>
-            <ul className="mt-2 space-y-1 text-sm">
-              <li><strong>Assalomu alaikum</strong> – Peace be upon you (رسالام‌علیکم)</li>
-              <li><strong>Labas</strong> – Hello (informal)</li>
-              <li><strong>Khush omadi</strong> – Welcome (خوش آمدید)</li>
-            </ul>
+            <p className="font-medium text-stone-900 mb-3">Greetings 📖</p>
+            <div className="space-y-2 text-sm">
+              {greetings.map((phrase, i) => (
+                <PhraseRow key={i} phrase={phrase} />
+              ))}
+            </div>
           </div>
 
           <div>
-            <p className="font-medium text-stone-900">Courtesy</p>
-            <ul className="mt-2 space-y-1 text-sm">
-              <li><strong>Mehmoni</strong> – Guest (مهمان)</li>
-              <li><strong>Rahmat</strong> – Thank you (رحمت/تشکر)</li>
-              <li><strong>Ilhos</strong> – Excuse me</li>
-              <li><strong>Bale</strong> – Yes (بله)</li>
-              <li><strong>Neh</strong> – No (نه)</li>
-            </ul>
+            <p className="font-medium text-stone-900 mb-3">Courtesy Expressions 🤝</p>
+            <div className="space-y-2 text-sm">
+              {courtesy.map((phrase, i) => (
+                <PhraseRow key={i} phrase={phrase} />
+              ))}
+            </div>
           </div>
 
           <div>
-            <p className="font-medium text-stone-900">Common Words</p>
-            <ul className="mt-2 space-y-1 text-sm">
-              <li><strong>Ov</strong> – Water (آب)</li>
-              <li><strong>Nон</strong> – Bread (نان)</li>
-              <li><strong>Khonadon</strong> – Family (خانواده)</li>
-              <li><strong>Dost</strong> – Friend (دوست)</li>
-              <li><strong>Muhabbat</strong> – Love (محبت)</li>
-            </ul>
+            <p className="font-medium text-stone-900 mb-3">Common Words 💬</p>
+            <div className="space-y-2 text-sm">
+              {words.map((phrase, i) => (
+                <PhraseRow key={i} phrase={phrase} />
+              ))}
+            </div>
           </div>
+        </div>
+      </ContentCard>
+
+      <ContentCard title="Cyrillic Script Note">
+        <p className="mb-3">
+          Here are some key Cyrillic letters in Tajik that you'll encounter:
+        </p>
+        <div className="grid grid-cols-2 gap-3 text-sm mt-4">
+          <div><strong>Ғ</strong> – ghayn (غ) – a guttural sound</div>
+          <div><strong>Ӣ</strong> – long "ee" (ی)</div>
+          <div><strong>Ӯ</strong> – long "oo" (و)</div>
+          <div><strong>Ҳ</strong> – "h" sound (ح)</div>
+          <div><strong>Ҷ</strong> – "ch" sound (چ)</div>
+          <div><strong>Ӣ</strong> – long "i" (ی)</div>
         </div>
       </ContentCard>
 
@@ -250,17 +292,17 @@ function LanguageSection() {
         <p>
           Tajik culture places great value on respect and formal address. Older people are addressed with honorifics. Poetry is deeply embedded in Tajik culture—Rudaki and Omar Khayyam are celebrated poets whose works are still widely read.
         </p>
-        <FarsiCallout word="Shoir" farsi="شاعر" note="Poet – central to Persian/Tajik literary tradition" />
+        <FarsiCallout word="Шоир (Shoir)" farsi="شاعر" note="Poet – central to Persian/Tajik literary tradition" />
         <p className="mt-4">
-          The phrase <strong>"Duо кунам"</strong> (دعا کنم) – "I pray/wish for you" – is commonly used to express good intentions toward others.
+          The phrase <strong>Дуо кунам</strong> (Дуо кунам) – "I pray/wish for you" – is commonly used to express good intentions toward others.
         </p>
       </ContentCard>
 
       <ContentCard title="Proverbs & Wisdom">
         <ul className="space-y-3 text-sm">
-          <li><strong>"Дили рома рома"</strong> – A happy heart makes happy days</li>
-          <li><strong>"Чун болавҷ, душвор"</strong> – Life is difficult, but perseverance brings reward</li>
-          <li><strong>"Орифе дарнаме, охири дарнаме"</strong> – Knowledge is the beginning and end (from Persian wisdom)</li>
+          <li><strong>Дили рома рома</strong> – A happy heart makes happy days</li>
+          <li><strong>Чун болавҷ, душвор</strong> – Life is difficult, but perseverance brings reward</li>
+          <li><strong>Орифе дарнаме, охири дарнаме</strong> – Knowledge is the beginning and end</li>
         </ul>
       </ContentCard>
     </div>
@@ -409,6 +451,69 @@ function PhotographySection() {
 }
 
 // Components
+function PhraseRow({ phrase }: { phrase: Phrase }) {
+  const [isPlaying, setIsPlaying] = useState(false)
+
+  const playAudio = async () => {
+    if (!phrase.transliteration) return
+    setIsPlaying(true)
+    try {
+      const apiKey = process.env.REACT_APP_OPENAI_KEY
+      if (!apiKey) {
+        console.log('No OpenAI key configured. Audio unavailable.')
+        setIsPlaying(false)
+        return
+      }
+
+      const response = await fetch('https://api.openai.com/v1/audio/speech', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${apiKey}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          model: 'tts-1',
+          input: phrase.transliteration,
+          voice: 'onyx',
+        }),
+      })
+
+      if (response.ok) {
+        const arrayBuffer = await response.arrayBuffer()
+        const blob = new Blob([arrayBuffer], { type: 'audio/mpeg' })
+        const url = URL.createObjectURL(blob)
+        const audio = new Audio(url)
+        audio.play()
+      }
+    } catch (error) {
+      console.error('Audio playback failed:', error)
+    } finally {
+      setIsPlaying(false)
+    }
+  }
+
+  return (
+    <div className="flex items-start justify-between bg-stone-50 p-3 rounded border border-stone-100">
+      <div className="flex-1 min-w-0">
+        <div className="font-mono text-sm text-stone-900 mb-1">{phrase.tajikCyrillic}</div>
+        <div className="text-xs text-stone-600">{phrase.transliteration}</div>
+        <div className="text-xs text-stone-500 italic mt-1">{phrase.farsi}</div>
+      </div>
+      <div className="flex items-center gap-3 ml-4 flex-shrink-0">
+        <div className="text-sm text-stone-700">{phrase.english}</div>
+        <button
+          onClick={playAudio}
+          disabled={isPlaying}
+          className="text-sm bg-stone-200 hover:bg-stone-300 disabled:bg-stone-300 px-2 py-1 rounded transition-colors"
+          title="Play pronunciation (requires OpenAI API key)"
+        >
+          {isPlaying ? '⏸' : '🔊'}
+        </button>
+      </div>
+    </div>
+  )
+}
+
 function ContentCard({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div className="bg-white rounded-lg border border-stone-200 p-8">

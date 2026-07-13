@@ -6,4 +6,13 @@
   body {
     @apply bg-stone-50 text-stone-900;
   }
+
+  /* Dark mode using data-theme attribute */
+  [data-theme="dark"] {
+    color-scheme: dark;
+  }
+
+  [data-theme="dark"] body {
+    @apply bg-stone-950 text-stone-100;
+  }
 }

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 type Section = 'history' | 'culture' | 'politics' | 'language' | 'cities' | 'photography' | 'flashcards'
 
@@ -83,6 +83,18 @@ function FlashcardsIcon({ className }: { className: string }) {
 
 export default function App() {
   const [activeSection, setActiveSection] = useState<Section>('history')
+  const [isDark, setIsDark] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const stored = localStorage.getItem('theme')
+      return stored === 'dark' || (!stored && window.matchMedia('(prefers-color-scheme: dark)').matches)
+    }
+    return false
+  })
+
+  useEffect(() => {
+    localStorage.setItem('theme', isDark ? 'dark' : 'light')
+    document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light')
+  }, [isDark])
 
   const sections: NavSection[] = [
     { id: 'history', label: 'History', icon: HistoryIcon },
@@ -95,17 +107,26 @@ export default function App() {
   ]
 
   return (
-    <div className="min-h-screen bg-stone-50">
+    <div className="min-h-screen bg-white dark:bg-stone-950 text-stone-900 dark:text-stone-100 transition-colors">
       {/* Header */}
-      <header className="border-b border-stone-200">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
-          <h1 className="text-4xl sm:text-6xl font-light text-stone-900 mb-2 sm:mb-3">Tajikistan</h1>
-          <p className="text-lg sm:text-xl text-stone-600 font-light leading-relaxed">A learning journey through history, culture, and language</p>
+      <header className="border-b border-stone-200 dark:border-stone-800">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 py-12 sm:py-16 flex justify-between items-start">
+          <div>
+            <h1 className="text-4xl sm:text-6xl font-light text-stone-900 dark:text-stone-50 mb-2 sm:mb-3">Tajikistan</h1>
+            <p className="text-lg sm:text-xl text-stone-600 dark:text-stone-400 font-light leading-relaxed">A learning journey through history, culture, and language</p>
+          </div>
+          <button
+            onClick={() => setIsDark(!isDark)}
+            className="mt-2 px-3 py-2 rounded-lg bg-stone-200 dark:bg-stone-800 hover:bg-stone-300 dark:hover:bg-stone-700 transition-colors text-sm font-medium"
+            title={isDark ? 'Light mode' : 'Dark mode'}
+          >
+            {isDark ? '☀️' : '🌙'}
+          </button>
         </div>
       </header>
 
       {/* Navigation */}
-      <nav className="border-b border-stone-200 bg-white sticky top-0 z-10">
+      <nav className="border-b border-stone-200 dark:border-stone-800 bg-white dark:bg-stone-900 sticky top-0 z-10">
         <div className="max-w-4xl mx-auto px-4 sm:px-6">
           <div className="flex overflow-x-auto gap-2 sm:gap-8">
             {sections.map((section) => {
@@ -116,8 +137,8 @@ export default function App() {
                   onClick={() => setActiveSection(section.id)}
                   className={`py-4 px-2 sm:px-1 border-b-2 transition-all flex items-center gap-1 sm:gap-2 text-xs sm:text-sm font-medium whitespace-nowrap ${
                     activeSection === section.id
-                      ? 'border-stone-900 text-stone-900'
-                      : 'border-transparent text-stone-500 hover:text-stone-700'
+                      ? 'border-stone-900 dark:border-stone-50 text-stone-900 dark:text-stone-50'
+                      : 'border-transparent text-stone-500 dark:text-stone-400 hover:text-stone-700 dark:hover:text-stone-300'
                   }`}
                 >
                   <Icon className="w-4 h-4" />
@@ -539,6 +560,23 @@ function FlashcardsSection() {
   const [isFlipped, setIsFlipped] = useState(false)
   const [isPlayingAudio, setIsPlayingAudio] = useState(false)
 
+  // Keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowRight') {
+        e.preventDefault()
+        setCardIndex((prev) => (prev + 1) % flashcardSets[currentSet].length)
+        setIsFlipped(false)
+      } else if (e.key === 'ArrowLeft') {
+        e.preventDefault()
+        setCardIndex((prev) => (prev - 1 + flashcardSets[currentSet].length) % flashcardSets[currentSet].length)
+        setIsFlipped(false)
+      }
+    }
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [currentSet])
+
   const flashcardSets: Record<'language' | 'cities' | 'history', Flashcard[]> = {
     language: [
       { front: 'Ассалому алайкум', back: 'Peace be upon you', category: 'Greeting' },
@@ -556,6 +594,8 @@ function FlashcardsSection() {
       { front: 'Dushanbe', back: 'Capital, 850k people, meaning "Monday"', category: 'City' },
       { front: 'Khujand', back: '190k people, historic Silk Road city, 500 BC', category: 'City' },
       { front: 'Khorog', back: '35k people, Pamir gateway, mountain city', category: 'City' },
+      { front: 'Bokhtar', back: '63k people, Khatlon province, agricultural region', category: 'City' },
+      { front: 'Kulob', back: '93k people, Khatlon province, historical cultural center', category: 'City' },
       { front: 'What river borders Tajikistan?', back: 'Amu Darya', category: 'Geography' },
       { front: 'Highest mountain in Tajikistan?', back: 'Peak Ismail Samani (7,495m)', category: 'Geography' },
       { front: 'Panj Valley location?', back: 'Southern Tajikistan, Khorog area, Afghanistan border', category: 'Geography' },
@@ -661,7 +701,7 @@ function FlashcardsSection() {
 
   return (
     <div className="space-y-8">
-      <h2 className="text-4xl font-light text-stone-900 mb-10">Flashcards</h2>
+      <h2 className="text-4xl font-light text-stone-900 dark:text-stone-50 mb-10">Flashcards</h2>
 
       {/* Set Selector */}
       <div className="flex gap-3 flex-wrap">
@@ -675,8 +715,8 @@ function FlashcardsSection() {
             }}
             className={`px-4 sm:px-6 py-2 rounded-lg border-2 transition-all font-medium ${
               currentSet === set
-                ? 'border-stone-900 bg-stone-900 text-white'
-                : 'border-stone-300 text-stone-700 hover:border-stone-500'
+                ? 'border-stone-900 dark:border-stone-50 bg-stone-900 dark:bg-stone-50 text-white dark:text-stone-900'
+                : 'border-stone-300 dark:border-stone-700 text-stone-700 dark:text-stone-300 hover:border-stone-500 dark:hover:border-stone-500'
             }`}
           >
             {set.charAt(0).toUpperCase() + set.slice(1)}
@@ -701,12 +741,12 @@ function FlashcardsSection() {
           >
             {/* Front */}
             <div
-              className="absolute w-full h-full bg-white border-2 border-stone-300 rounded-lg p-4 sm:p-8 flex flex-col items-center justify-center text-center gap-3 sm:gap-4"
+              className="absolute w-full h-full bg-white dark:bg-stone-900 border-2 border-stone-300 dark:border-stone-700 rounded-lg p-4 sm:p-8 flex flex-col items-center justify-center text-center gap-3 sm:gap-4"
               style={{ backfaceVisibility: 'hidden' }}
             >
               <div>
-                <p className="text-xs sm:text-sm text-stone-500 mb-3 sm:mb-4">Click to reveal</p>
-                <p className="text-2xl sm:text-4xl font-light text-stone-900 break-words">{card.front}</p>
+                <p className="text-xs sm:text-sm text-stone-500 dark:text-stone-400 mb-3 sm:mb-4">Click to reveal</p>
+                <p className="text-2xl sm:text-4xl font-light text-stone-900 dark:text-stone-50 break-words">{card.front}</p>
               </div>
               <button
                 onClick={(e) => {
@@ -714,7 +754,7 @@ function FlashcardsSection() {
                   playFlashcardAudio(card.front)
                 }}
                 disabled={isPlayingAudio}
-                className="px-4 sm:px-6 py-2 sm:py-3 bg-stone-200 hover:bg-stone-300 disabled:bg-stone-300 rounded transition-colors text-base sm:text-lg min-h-10 min-w-10"
+                className="px-4 sm:px-6 py-2 sm:py-3 bg-stone-200 dark:bg-stone-800 hover:bg-stone-300 dark:hover:bg-stone-700 disabled:bg-stone-300 dark:disabled:bg-stone-700 rounded transition-colors text-base sm:text-lg min-h-10 min-w-10"
                 title="Pronounce this word"
               >
                 {isPlayingAudio ? '⏸' : '🔊'}
@@ -723,12 +763,12 @@ function FlashcardsSection() {
 
             {/* Back */}
             <div
-              className="absolute w-full h-full bg-stone-100 border-2 border-stone-300 rounded-lg p-4 sm:p-8 flex flex-col items-center justify-center text-center gap-3 sm:gap-4"
+              className="absolute w-full h-full bg-stone-100 dark:bg-stone-800 border-2 border-stone-300 dark:border-stone-700 rounded-lg p-4 sm:p-8 flex flex-col items-center justify-center text-center gap-3 sm:gap-4"
               style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
             >
               <div>
-                <p className="text-xs sm:text-sm text-stone-500 mb-2">{card.category}</p>
-                <p className="text-xl sm:text-3xl font-light text-stone-900 break-words">{card.back}</p>
+                <p className="text-xs sm:text-sm text-stone-500 dark:text-stone-400 mb-2">{card.category}</p>
+                <p className="text-xl sm:text-3xl font-light text-stone-900 dark:text-stone-50 break-words">{card.back}</p>
               </div>
               <button
                 onClick={(e) => {
@@ -736,7 +776,7 @@ function FlashcardsSection() {
                   playFlashcardAudio(card.front)
                 }}
                 disabled={isPlayingAudio}
-                className="px-4 sm:px-6 py-2 sm:py-3 bg-stone-300 hover:bg-stone-400 disabled:bg-stone-400 rounded transition-colors text-base sm:text-lg min-h-10 min-w-10"
+                className="px-4 sm:px-6 py-2 sm:py-3 bg-stone-300 dark:bg-stone-700 hover:bg-stone-400 dark:hover:bg-stone-600 disabled:bg-stone-400 dark:disabled:bg-stone-600 rounded transition-colors text-base sm:text-lg min-h-10 min-w-10"
                 title="Pronounce the Tajik word"
               >
                 {isPlayingAudio ? '⏸' : '🔊'}
@@ -747,7 +787,7 @@ function FlashcardsSection() {
 
         {/* Progress */}
         <div className="text-center">
-          <p className="text-base sm:text-lg text-stone-700 font-medium">
+          <p className="text-base sm:text-lg text-stone-700 dark:text-stone-300 font-medium">
             {cardIndex + 1} / {cards.length}
           </p>
         </div>
@@ -756,25 +796,25 @@ function FlashcardsSection() {
         <div className="flex gap-2 sm:gap-4 flex-wrap justify-center w-full px-2">
           <button
             onClick={prevCard}
-            className="flex-1 sm:flex-none px-3 sm:px-6 py-2.5 sm:py-2 bg-stone-200 hover:bg-stone-300 active:bg-stone-400 rounded-lg transition-colors font-medium text-sm sm:text-base min-h-10"
+            className="flex-1 sm:flex-none px-3 sm:px-6 py-2.5 sm:py-2 bg-stone-200 dark:bg-stone-800 hover:bg-stone-300 dark:hover:bg-stone-700 active:bg-stone-400 dark:active:bg-stone-600 rounded-lg transition-colors font-medium text-sm sm:text-base min-h-10"
           >
             ← Prev
           </button>
           <button
             onClick={shuffle}
-            className="flex-1 sm:flex-none px-3 sm:px-6 py-2.5 sm:py-2 bg-stone-900 hover:bg-stone-800 active:bg-black text-white rounded-lg transition-colors font-medium text-sm sm:text-base min-h-10"
+            className="flex-1 sm:flex-none px-3 sm:px-6 py-2.5 sm:py-2 bg-stone-900 dark:bg-stone-100 hover:bg-stone-800 dark:hover:bg-stone-200 active:bg-black dark:active:bg-stone-300 text-white dark:text-stone-900 rounded-lg transition-colors font-medium text-sm sm:text-base min-h-10"
           >
             🔀 Shuffle
           </button>
           <button
             onClick={nextCard}
-            className="flex-1 sm:flex-none px-3 sm:px-6 py-2.5 sm:py-2 bg-stone-200 hover:bg-stone-300 active:bg-stone-400 rounded-lg transition-colors font-medium text-sm sm:text-base min-h-10"
+            className="flex-1 sm:flex-none px-3 sm:px-6 py-2.5 sm:py-2 bg-stone-200 dark:bg-stone-800 hover:bg-stone-300 dark:hover:bg-stone-700 active:bg-stone-400 dark:active:bg-stone-600 rounded-lg transition-colors font-medium text-sm sm:text-base min-h-10"
           >
             Next →
           </button>
         </div>
 
-        <p className="text-xs sm:text-sm text-stone-500 text-center px-2">Tap the card to flip</p>
+        <p className="text-xs sm:text-sm text-stone-500 dark:text-stone-400 text-center px-2">Use arrow keys or tap to navigate • Click card to flip</p>
       </div>
     </div>
   )

@@ -80,7 +80,7 @@ export default function App() {
           </div>
           <button
             onClick={() => setIsDark(!isDark)}
-            className="mt-2 px-3 py-2 rounded-lg bg-stone-200 dark:bg-stone-800 hover:bg-stone-300 dark:hover:bg-stone-700 transition-colors text-sm font-medium"
+            className="mt-2 px-3 py-2 rounded-lg bg-stone-100 dark:bg-stone-900 hover:bg-stone-200 dark:hover:bg-stone-800 transition-all duration-200 text-sm font-medium border border-stone-200 dark:border-stone-800"
             title={isDark ? 'Light mode' : 'Dark mode'}
           >
             {isDark ? '◐' : '◑'}
@@ -98,10 +98,10 @@ export default function App() {
                 <button
                   key={section.id}
                   onClick={() => setActiveSection(section.id)}
-                  className={`py-4 px-2 sm:px-1 border-b-2 transition-all flex items-center gap-1 sm:gap-2 text-xs sm:text-sm font-medium whitespace-nowrap ${
+                  className={`py-3 px-3 transition-all duration-200 flex items-center gap-2 text-xs sm:text-sm font-medium whitespace-nowrap rounded-lg ${
                     activeSection === section.id
-                      ? 'border-stone-900 dark:border-stone-50 text-stone-900 dark:text-stone-50'
-                      : 'border-transparent text-stone-500 dark:text-stone-400 hover:text-stone-700 dark:hover:text-stone-300'
+                      ? 'bg-stone-900 dark:bg-stone-100 text-white dark:text-stone-900'
+                      : 'text-stone-600 dark:text-stone-400 hover:bg-stone-100 dark:hover:bg-stone-800'
                   }`}
                 >
                   <Icon className="w-4 h-4" />
@@ -756,22 +756,22 @@ function FlashcardsSection() {
         </div>
 
         {/* Controls - Optimized for mobile */}
-        <div className="flex gap-2 sm:gap-4 flex-wrap justify-center w-full px-2">
+        <div className="flex gap-3 sm:gap-4 flex-wrap justify-center w-full px-2">
           <button
             onClick={prevCard}
-            className="flex-1 sm:flex-none px-3 sm:px-6 py-2.5 sm:py-2 bg-stone-200 dark:bg-stone-800 hover:bg-stone-300 dark:hover:bg-stone-700 active:bg-stone-400 dark:active:bg-stone-600 rounded-lg transition-colors font-medium text-sm sm:text-base min-h-10"
+            className="flex-1 sm:flex-none px-4 sm:px-6 py-2.5 sm:py-3 bg-stone-100 dark:bg-stone-900 hover:bg-stone-200 dark:hover:bg-stone-800 active:bg-stone-300 dark:active:bg-stone-700 rounded-lg transition-all duration-200 font-medium text-sm sm:text-base min-h-11 border border-stone-200 dark:border-stone-800"
           >
             ← Prev
           </button>
           <button
             onClick={shuffle}
-            className="flex-1 sm:flex-none px-3 sm:px-6 py-2.5 sm:py-2 bg-stone-900 dark:bg-stone-100 hover:bg-stone-800 dark:hover:bg-stone-200 active:bg-black dark:active:bg-stone-300 text-white dark:text-stone-900 rounded-lg transition-colors font-medium text-sm sm:text-base min-h-10"
+            className="flex-1 sm:flex-none px-4 sm:px-6 py-2.5 sm:py-3 bg-stone-900 dark:bg-stone-100 hover:bg-stone-800 dark:hover:bg-stone-200 active:bg-black dark:active:bg-stone-300 text-white dark:text-stone-900 rounded-lg transition-all duration-200 font-medium text-sm sm:text-base min-h-11 shadow-md hover:shadow-lg"
           >
             ⇌ Shuffle
           </button>
           <button
             onClick={nextCard}
-            className="flex-1 sm:flex-none px-3 sm:px-6 py-2.5 sm:py-2 bg-stone-200 dark:bg-stone-800 hover:bg-stone-300 dark:hover:bg-stone-700 active:bg-stone-400 dark:active:bg-stone-600 rounded-lg transition-colors font-medium text-sm sm:text-base min-h-10"
+            className="flex-1 sm:flex-none px-4 sm:px-6 py-2.5 sm:py-3 bg-stone-100 dark:bg-stone-900 hover:bg-stone-200 dark:hover:bg-stone-800 active:bg-stone-300 dark:active:bg-stone-700 rounded-lg transition-all duration-200 font-medium text-sm sm:text-base min-h-11 border border-stone-200 dark:border-stone-800"
           >
             Next →
           </button>

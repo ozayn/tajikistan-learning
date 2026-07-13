@@ -4,7 +4,14 @@
 
 @layer base {
   body {
-    @apply bg-stone-50 text-stone-900;
+    @apply bg-white text-stone-900;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold tracking-tight;
   }
 
   /* Dark mode using data-theme attribute */
@@ -14,5 +21,25 @@
 
   [data-theme="dark"] body {
     @apply bg-stone-950 text-stone-100;
+  }
+}
+
+@layer components {
+  /* Modern button style */
+  .btn-primary {
+    @apply px-4 py-2.5 rounded-lg font-medium transition-all duration-200;
+    @apply hover:bg-stone-100 active:bg-stone-200;
+    @apply dark:hover:bg-stone-800 dark:active:bg-stone-700;
+  }
+
+  /* Modern card style */
+  .card {
+    @apply bg-white dark:bg-stone-900 rounded-xl border border-stone-200 dark:border-stone-800;
+    @apply shadow-sm hover:shadow-md transition-shadow duration-200;
+  }
+
+  /* Subtle shadow */
+  .shadow-subtle {
+    @apply shadow-sm;
   }
 }

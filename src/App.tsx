@@ -81,8 +81,9 @@ export default function App() {
           </div>
           <button
             onClick={() => setIsDark(!isDark)}
-            className="mt-2 px-3 py-2 rounded-lg bg-stone-100 dark:bg-stone-900 hover:bg-stone-200 dark:hover:bg-stone-800 transition-all duration-200 text-sm font-medium border border-stone-200 dark:border-stone-800 flex-shrink-0"
+            className="mt-2 px-3 py-2 rounded-lg bg-stone-100 dark:bg-stone-900 hover:bg-stone-200 dark:hover:bg-stone-800 transition-all duration-200 text-sm font-medium border border-stone-200 dark:border-stone-800 flex-shrink-0 focus:outline-2 focus:outline-offset-2 focus:outline-stone-900 dark:focus:outline-stone-100"
             title={isDark ? 'Light mode' : 'Dark mode'}
+            aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
           >
             {isDark ? '◐' : '◑'}
           </button>
@@ -95,8 +96,11 @@ export default function App() {
         <nav className="sm:hidden fixed top-0 left-0 right-0 bg-white dark:bg-stone-900 border-b border-stone-200 dark:border-stone-800 z-20 flex items-center h-16 px-4">
           <button
             onClick={() => setDrawerOpen(!drawerOpen)}
-            className="p-2 rounded-lg hover:bg-stone-100 dark:hover:bg-stone-800 transition-all duration-200"
+            className="p-2 rounded-lg hover:bg-stone-100 dark:hover:bg-stone-800 transition-all duration-200 focus:outline-2 focus:outline-offset-2 focus:outline-stone-900 dark:focus:outline-stone-100"
             title="Open menu"
+            aria-expanded={drawerOpen}
+            aria-controls="drawer-nav"
+            aria-label="Toggle navigation menu"
           >
             {drawerOpen ? '✕' : '☰'}
           </button>
@@ -115,7 +119,7 @@ export default function App() {
               className="fixed inset-0 bg-black bg-opacity-30 z-30 sm:hidden"
               onClick={() => setDrawerOpen(false)}
             />
-            <aside className="fixed left-0 top-16 bottom-0 w-64 bg-white dark:bg-stone-900 border-r border-stone-200 dark:border-stone-800 overflow-y-auto z-40 sm:hidden">
+            <aside className="fixed left-0 top-16 bottom-0 w-64 bg-white dark:bg-stone-900 border-r border-stone-200 dark:border-stone-800 overflow-y-auto z-40 sm:hidden" id="drawer-nav">
               <div className="p-4 space-y-1">
                 {sections.map((section) => {
                   const Icon = section.icon
@@ -126,7 +130,8 @@ export default function App() {
                         setActiveSection(section.id)
                         setDrawerOpen(false)
                       }}
-                      className={`w-full px-4 py-3 rounded-lg transition-all duration-200 flex items-center gap-3 text-sm font-medium ${
+                      aria-current={activeSection === section.id ? 'page' : undefined}
+                      className={`w-full px-4 py-3 rounded-lg transition-all duration-200 flex items-center gap-3 text-sm font-medium focus:outline-2 focus:outline-offset-2 focus:outline-stone-900 dark:focus:outline-stone-100 ${
                         activeSection === section.id
                           ? 'bg-stone-900 dark:bg-stone-100 text-white dark:text-stone-900'
                           : 'text-stone-700 dark:text-stone-300 hover:bg-stone-100 dark:hover:bg-stone-800'
@@ -151,7 +156,8 @@ export default function App() {
                 <button
                   key={section.id}
                   onClick={() => setActiveSection(section.id)}
-                  className={`w-full px-4 py-3 rounded-lg transition-all duration-200 flex items-center gap-3 text-sm font-medium ${
+                  aria-current={activeSection === section.id ? 'page' : undefined}
+                  className={`w-full px-4 py-3 rounded-lg transition-all duration-200 flex items-center gap-3 text-sm font-medium focus:outline-2 focus:outline-offset-2 focus:outline-stone-900 dark:focus:outline-stone-100 ${
                     activeSection === section.id
                       ? 'bg-stone-900 dark:bg-stone-100 text-white dark:text-stone-900'
                       : 'text-stone-700 dark:text-stone-300 hover:bg-stone-100 dark:hover:bg-stone-800'
@@ -763,7 +769,7 @@ function FlashcardsSection() {
               style={{ backfaceVisibility: 'hidden' }}
             >
               <div>
-                <p className="text-xs sm:text-sm text-stone-500 dark:text-stone-400 mb-3 sm:mb-4">Click to reveal</p>
+                <p className="text-xs sm:text-sm text-stone-500 dark:text-stone-400 mb-3 sm:mb-4">Tap to reveal</p>
                 <p className="text-2xl sm:text-4xl font-light text-stone-900 dark:text-stone-50 break-words">{card.front}</p>
               </div>
               <button
@@ -772,7 +778,8 @@ function FlashcardsSection() {
                   playFlashcardAudio(card.front)
                 }}
                 disabled={isPlayingAudio}
-                className="px-4 sm:px-6 py-2 sm:py-3 bg-stone-200 dark:bg-stone-800 hover:bg-stone-300 dark:hover:bg-stone-700 disabled:bg-stone-300 dark:disabled:bg-stone-700 rounded transition-colors text-base sm:text-lg min-h-10 min-w-10"
+                aria-label={`Pronounce: ${card.front}`}
+                className="px-4 sm:px-6 py-2 sm:py-3 bg-stone-200 dark:bg-stone-800 hover:bg-stone-300 dark:hover:bg-stone-700 disabled:bg-stone-300 dark:disabled:bg-stone-700 rounded transition-colors text-base sm:text-lg min-h-10 min-w-10 focus:outline-2 focus:outline-offset-2 focus:outline-stone-900 dark:focus:outline-stone-100"
                 title="Pronounce this word"
               >
                 {isPlayingAudio ? '◼' : '♪'}
@@ -794,7 +801,8 @@ function FlashcardsSection() {
                   playFlashcardAudio(card.front)
                 }}
                 disabled={isPlayingAudio}
-                className="px-4 sm:px-6 py-2 sm:py-3 bg-stone-300 dark:bg-stone-700 hover:bg-stone-400 dark:hover:bg-stone-600 disabled:bg-stone-400 dark:disabled:bg-stone-600 rounded transition-colors text-base sm:text-lg min-h-10 min-w-10"
+                aria-label={`Pronounce Tajik: ${card.front}`}
+                className="px-4 sm:px-6 py-2 sm:py-3 bg-stone-300 dark:bg-stone-700 hover:bg-stone-400 dark:hover:bg-stone-600 disabled:bg-stone-400 dark:disabled:bg-stone-600 rounded transition-colors text-base sm:text-lg min-h-10 min-w-10 focus:outline-2 focus:outline-offset-2 focus:outline-stone-900 dark:focus:outline-stone-100"
                 title="Pronounce the Tajik word"
               >
                 {isPlayingAudio ? '◼' : '♪'}
@@ -814,19 +822,22 @@ function FlashcardsSection() {
         <div className="flex gap-3 sm:gap-4 flex-wrap justify-center w-full px-2 flashcard-controls">
           <button
             onClick={prevCard}
-            className="flex-1 sm:flex-none px-4 sm:px-6 py-2.5 sm:py-3 bg-stone-100 dark:bg-stone-900 hover:bg-stone-200 dark:hover:bg-stone-800 active:bg-stone-300 dark:active:bg-stone-700 rounded-lg transition-all duration-200 font-medium text-sm sm:text-base min-h-11 border border-stone-200 dark:border-stone-800"
+            aria-label={`Previous card (${cardIndex} of ${cards.length})`}
+            className="flex-1 sm:flex-none px-4 sm:px-6 py-2.5 sm:py-3 bg-stone-100 dark:bg-stone-900 hover:bg-stone-200 dark:hover:bg-stone-800 active:bg-stone-300 dark:active:bg-stone-700 rounded-lg transition-all duration-200 font-medium text-sm sm:text-base min-h-11 border border-stone-200 dark:border-stone-800 focus:outline-2 focus:outline-offset-2 focus:outline-stone-900 dark:focus:outline-stone-100"
           >
             ← Prev
           </button>
           <button
             onClick={shuffle}
-            className="flex-1 sm:flex-none px-4 sm:px-6 py-2.5 sm:py-3 bg-stone-900 dark:bg-stone-100 hover:bg-stone-800 dark:hover:bg-stone-200 active:bg-black dark:active:bg-stone-300 text-white dark:text-stone-900 rounded-lg transition-all duration-200 font-medium text-sm sm:text-base min-h-11 shadow-md hover:shadow-lg"
+            aria-label="Shuffle cards"
+            className="flex-1 sm:flex-none px-4 sm:px-6 py-2.5 sm:py-3 bg-stone-900 dark:bg-stone-100 hover:bg-stone-800 dark:hover:bg-stone-200 active:bg-black dark:active:bg-stone-300 text-white dark:text-stone-900 rounded-lg transition-all duration-200 font-medium text-sm sm:text-base min-h-11 shadow-md hover:shadow-lg focus:outline-2 focus:outline-offset-2 focus:outline-stone-900 dark:focus:outline-stone-100"
           >
             ⇌ Shuffle
           </button>
           <button
             onClick={nextCard}
-            className="flex-1 sm:flex-none px-4 sm:px-6 py-2.5 sm:py-3 bg-stone-100 dark:bg-stone-900 hover:bg-stone-200 dark:hover:bg-stone-800 active:bg-stone-300 dark:active:bg-stone-700 rounded-lg transition-all duration-200 font-medium text-sm sm:text-base min-h-11 border border-stone-200 dark:border-stone-800"
+            aria-label={`Next card (${cardIndex + 2} of ${cards.length})`}
+            className="flex-1 sm:flex-none px-4 sm:px-6 py-2.5 sm:py-3 bg-stone-100 dark:bg-stone-900 hover:bg-stone-200 dark:hover:bg-stone-800 active:bg-stone-300 dark:active:bg-stone-700 rounded-lg transition-all duration-200 font-medium text-sm sm:text-base min-h-11 border border-stone-200 dark:border-stone-800 focus:outline-2 focus:outline-offset-2 focus:outline-stone-900 dark:focus:outline-stone-100"
           >
             Next →
           </button>

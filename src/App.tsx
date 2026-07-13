@@ -543,6 +543,45 @@ function LanguageSection() {
         </p>
       </ContentCard>
 
+      <ContentCard title="Travel & Navigation (Getting Around)">
+        <div className="space-y-6">
+          <div>
+            <p className="font-medium text-stone-900 mb-3">Directions & Location 🗺</p>
+            <div className="space-y-2 text-sm">
+              <PhraseRow phrase={{ tajikCyrillic: 'Куҷо?', transliteration: 'Kujo?', farsi: 'کجا؟', english: 'Where?' }} />
+              <PhraseRow phrase={{ tajikCyrillic: 'Роҳ ба...?', transliteration: 'Rah ba...?', farsi: 'راه به...؟', english: 'Road/way to...?' }} />
+              <PhraseRow phrase={{ tajikCyrillic: 'Бақайиқ нәзди маро аст', transliteration: 'Baqayiq nazdi maro ast', farsi: 'بقایق نزدی من است', english: 'It\'s close to me' }} />
+              <PhraseRow phrase={{ tajikCyrillic: 'Чап', transliteration: 'Chap', farsi: 'چپ', english: 'Left' }} />
+              <PhraseRow phrase={{ tajikCyrillic: 'Раст', transliteration: 'Rast', farsi: 'راست', english: 'Right' }} />
+              <PhraseRow phrase={{ tajikCyrillic: 'Рост', transliteration: 'Rost', farsi: 'روست', english: 'Straight' }} />
+            </div>
+          </div>
+
+          <div>
+            <p className="font-medium text-stone-900 mb-3">Transportation & Places 🚕</p>
+            <div className="space-y-2 text-sm">
+              <PhraseRow phrase={{ tajikCyrillic: 'Такси', transliteration: 'Taksi', farsi: 'تاکسی', english: 'Taxi' }} />
+              <PhraseRow phrase={{ tajikCyrillic: 'Автобус', transliteration: 'Avtobus', farsi: 'اتوبوس', english: 'Bus' }} />
+              <PhraseRow phrase={{ tajikCyrillic: 'Ҳотел', transliteration: 'Hotel', farsi: 'هتل', english: 'Hotel' }} />
+              <PhraseRow phrase={{ tajikCyrillic: 'Ресторан', transliteration: 'Restoran', farsi: 'رستوران', english: 'Restaurant' }} />
+              <PhraseRow phrase={{ tajikCyrillic: 'Базор', transliteration: 'Bazar', farsi: 'بازار', english: 'Bazaar/Market' }} />
+              <PhraseRow phrase={{ tajikCyrillic: 'Парк', transliteration: 'Park', farsi: 'پارک', english: 'Park' }} />
+              <PhraseRow phrase={{ tajikCyrillic: 'Мусеј', transliteration: 'Musej', farsi: 'موزه', english: 'Museum' }} />
+            </div>
+          </div>
+
+          <div>
+            <p className="font-medium text-stone-900 mb-3">Useful Travel Phrases 💬</p>
+            <div className="space-y-2 text-sm">
+              <PhraseRow phrase={{ tajikCyrillic: 'Ман туристам', transliteration: 'Man turistam', farsi: 'من گردشگر هستم', english: 'I am a tourist' }} />
+              <PhraseRow phrase={{ tajikCyrillic: 'Мухлис нист', transliteration: 'Mukhlis nist', farsi: 'مشکل نیست', english: 'No problem / It\'s okay' }} />
+              <PhraseRow phrase={{ tajikCyrillic: 'Қиммат аст?', transliteration: 'Qimmati ast?', farsi: 'قیمتش چقدر است؟', english: 'How much does it cost?' }} />
+              <PhraseRow phrase={{ tajikCyrillic: 'Забони фарсиро сухан мезанам', transliteration: 'Zaboni Farsiро sukhani mizinam', farsi: 'فارسی حرف میزنم', english: 'I speak Farsi' }} />
+            </div>
+          </div>
+        </div>
+      </ContentCard>
+
       <ContentCard title="Proverbs & Wisdom">
         <ul className="space-y-3 text-sm">
           <li><strong>Дили рома рома</strong> – A happy heart makes happy days</li>

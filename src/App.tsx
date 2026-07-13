@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-type Section = 'history' | 'culture' | 'politics' | 'language' | 'cities' | 'photography'
+type Section = 'history' | 'culture' | 'politics' | 'language' | 'cities' | 'photography' | 'flashcards'
 
 interface Phrase {
   tajikCyrillic: string
@@ -71,6 +71,16 @@ function PhotographyIcon({ className }: { className: string }) {
   )
 }
 
+function FlashcardsIcon({ className }: { className: string }) {
+  return (
+    <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <rect x="3" y="6" width="18" height="12" rx="1" strokeWidth="1.5" />
+      <path d="M3 10h18M12 10v8" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M7 14h2M15 14h2" strokeWidth="1.5" strokeLinecap="round" />
+    </svg>
+  )
+}
+
 export default function App() {
   const [activeSection, setActiveSection] = useState<Section>('history')
 
@@ -81,6 +91,7 @@ export default function App() {
     { id: 'language', label: 'Language', icon: LanguageIcon },
     { id: 'cities', label: 'Cities', icon: CitiesIcon },
     { id: 'photography', label: 'Photography', icon: PhotographyIcon },
+    { id: 'flashcards', label: 'Flashcards', icon: FlashcardsIcon },
   ]
 
   return (
@@ -126,6 +137,7 @@ export default function App() {
         {activeSection === 'language' && <LanguageSection />}
         {activeSection === 'cities' && <CitiesSection />}
         {activeSection === 'photography' && <PhotographySection />}
+        {activeSection === 'flashcards' && <FlashcardsSection />}
       </main>
     </div>
   )
@@ -511,6 +523,165 @@ function PhotographySection() {
           <li>• Generational changes and modernization</li>
         </ul>
       </ContentCard>
+    </div>
+  )
+}
+
+interface Flashcard {
+  front: string
+  back: string
+  category: string
+}
+
+function FlashcardsSection() {
+  const [currentSet, setCurrentSet] = useState<'language' | 'cities' | 'history'>('language')
+  const [cardIndex, setCardIndex] = useState(0)
+  const [isFlipped, setIsFlipped] = useState(false)
+
+  const flashcardSets: Record<'language' | 'cities' | 'history', Flashcard[]> = {
+    language: [
+      { front: 'Ассалому алайкум', back: 'Peace be upon you', category: 'Greeting' },
+      { front: 'Лабас', back: 'Hello (informal)', category: 'Greeting' },
+      { front: 'Рахмат', back: 'Thank you', category: 'Courtesy' },
+      { front: 'Об', back: 'Water', category: 'Word' },
+      { front: 'Нон', back: 'Bread', category: 'Word' },
+      { front: 'Дост', back: 'Friend', category: 'Word' },
+      { front: 'Мухаббат', back: 'Love', category: 'Word' },
+      { front: 'Хонавода', back: 'Family', category: 'Word' },
+      { front: 'Бале', back: 'Yes', category: 'Response' },
+      { front: 'Не', back: 'No', category: 'Response' },
+    ],
+    cities: [
+      { front: 'Dushanbe', back: 'Capital, 850k people, meaning "Monday"', category: 'City' },
+      { front: 'Khujand', back: '190k people, historic Silk Road city, 500 BC', category: 'City' },
+      { front: 'Khorog', back: '35k people, Pamir gateway, mountain city', category: 'City' },
+      { front: 'What river borders Tajikistan?', back: 'Amu Darya', category: 'Geography' },
+      { front: 'Highest mountain in Tajikistan?', back: 'Peak Ismail Samani (7,495m)', category: 'Geography' },
+      { front: 'Panj Valley location?', back: 'Southern Tajikistan, Khorog area, Afghanistan border', category: 'Geography' },
+    ],
+    history: [
+      { front: 'When did Tajikistan gain independence?', back: 'September 9, 1991', category: 'Modern History' },
+      { front: 'Who conquered Tajikistan in 4th century BC?', back: 'Alexander the Great', category: 'Ancient History' },
+      { front: 'Samanid Empire dates?', back: '9th-10th centuries, Persian golden age', category: 'Medieval History' },
+      { front: 'Civil war period?', back: '1992-1997', category: 'Modern History' },
+      { front: 'Current president (as of 2024)?', back: 'Emomali Rahmon (since 1992)', category: 'Modern History' },
+      { front: 'Silk Road importance?', back: 'Trade route connecting East & West through Central Asia', category: 'Historical Trade' },
+    ],
+  }
+
+  const cards = flashcardSets[currentSet]
+  const card = cards[cardIndex]
+
+  const nextCard = () => {
+    setCardIndex((prev) => (prev + 1) % cards.length)
+    setIsFlipped(false)
+  }
+
+  const prevCard = () => {
+    setCardIndex((prev) => (prev - 1 + cards.length) % cards.length)
+    setIsFlipped(false)
+  }
+
+  const shuffle = () => {
+    setCardIndex(Math.floor(Math.random() * cards.length))
+    setIsFlipped(false)
+  }
+
+  return (
+    <div className="space-y-8">
+      <h2 className="text-4xl font-light text-stone-900 mb-10">Flashcards</h2>
+
+      {/* Set Selector */}
+      <div className="flex gap-3 flex-wrap">
+        {(['language', 'cities', 'history'] as const).map((set) => (
+          <button
+            key={set}
+            onClick={() => {
+              setCurrentSet(set)
+              setCardIndex(0)
+              setIsFlipped(false)
+            }}
+            className={`px-4 sm:px-6 py-2 rounded-lg border-2 transition-all font-medium ${
+              currentSet === set
+                ? 'border-stone-900 bg-stone-900 text-white'
+                : 'border-stone-300 text-stone-700 hover:border-stone-500'
+            }`}
+          >
+            {set.charAt(0).toUpperCase() + set.slice(1)}
+          </button>
+        ))}
+      </div>
+
+      {/* Flashcard */}
+      <div className="flex flex-col items-center gap-8">
+        <div
+          onClick={() => setIsFlipped(!isFlipped)}
+          className="w-full max-w-2xl h-64 sm:h-80 cursor-pointer perspective"
+        >
+          <div
+            className={`relative w-full h-full transition-transform duration-500 ${
+              isFlipped ? 'scale-x-[-1]' : ''
+            }`}
+            style={{
+              transformStyle: 'preserve-3d',
+              transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)',
+            }}
+          >
+            {/* Front */}
+            <div
+              className="absolute w-full h-full bg-white border-2 border-stone-300 rounded-lg p-6 sm:p-8 flex items-center justify-center text-center"
+              style={{ backfaceVisibility: 'hidden' }}
+            >
+              <div>
+                <p className="text-sm text-stone-500 mb-4">Click to reveal</p>
+                <p className="text-3xl sm:text-4xl font-light text-stone-900">{card.front}</p>
+              </div>
+            </div>
+
+            {/* Back */}
+            <div
+              className="absolute w-full h-full bg-stone-100 border-2 border-stone-300 rounded-lg p-6 sm:p-8 flex items-center justify-center text-center"
+              style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
+            >
+              <div>
+                <p className="text-sm text-stone-500 mb-2">{card.category}</p>
+                <p className="text-2xl sm:text-3xl font-light text-stone-900">{card.back}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Progress */}
+        <div className="text-center">
+          <p className="text-lg text-stone-700 font-medium">
+            {cardIndex + 1} / {cards.length}
+          </p>
+        </div>
+
+        {/* Controls */}
+        <div className="flex gap-3 sm:gap-4 flex-wrap justify-center">
+          <button
+            onClick={prevCard}
+            className="px-4 sm:px-6 py-2 bg-stone-200 hover:bg-stone-300 rounded-lg transition-colors font-medium"
+          >
+            ← Previous
+          </button>
+          <button
+            onClick={shuffle}
+            className="px-4 sm:px-6 py-2 bg-stone-900 hover:bg-stone-800 text-white rounded-lg transition-colors font-medium"
+          >
+            🔀 Shuffle
+          </button>
+          <button
+            onClick={nextCard}
+            className="px-4 sm:px-6 py-2 bg-stone-200 hover:bg-stone-300 rounded-lg transition-colors font-medium"
+          >
+            Next →
+          </button>
+        </div>
+
+        <p className="text-sm text-stone-500 mt-4 text-center">Click the card to flip it</p>
+      </div>
     </div>
   )
 }
